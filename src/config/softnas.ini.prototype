@@ -1,0 +1,13 @@
+; softnas.ini
+; configuration information 
+[support]
+loglevel = "Info"
+supportemail = "support@softnas.com"
+[system]
+platform = "invalid"
+[flexfiles]
+maxFlows = "2"
+maxFlowVolumes = "2"
+[tieredstorage]
+maxTiersEnteprise = "2"
+

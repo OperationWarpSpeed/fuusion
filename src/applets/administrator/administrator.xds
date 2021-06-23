@@ -1,0 +1,65 @@
+{
+    "name": "administrator",
+    "settings": {
+        "cmd": {
+            "license": "commercial",
+            "cmdVersion": "",
+            "frameworkVersion": ""
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "http://localhost:60775/",
+        "exportPath": "/home/stoufa06/publish/admin",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": false,
+        "generateArchitectVersion": true,
+        "displayfield-ExtBox1-1332-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1296-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1351-inputEl": "Not Installed",
+        "projectHasEnabledWebServer": false,
+        "lockUrlPrefix": false,
+        "installStatus": "Not Installed",
+        "displayfield-ExtBox1-1176-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1122-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1181-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1144-inputEl": "a new version of the framework is available",
+        "urlPrefixTemplate": "http://localhost:{port}/{path}",
+        "displayfield-ExtBox1-1244-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1121-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1179-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1233-inputEl": "a new version of the framework is available"
+    },
+    "xdsVersion": "4.2.4",
+    "xdsBuild": 389,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "ext51",
+    "viewOrderMap": {
+        "view": [
+            "16665762-c358-4421-9ebe-9271658e0cd2",
+            "b0a88cbf-c49a-4773-b4a8-71b4b821bc44",
+            "098eb399-dc86-4c61-8b73-1062e295c71c"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "a5d5de32-b683-4864-9347-651eed9966aa",
+            "23d1c101-7459-4f7b-8cc9-6fa7b481c3e6",
+            "97948b0a-10fd-4ab2-9937-9284af85d0b0"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

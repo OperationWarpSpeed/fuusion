@@ -1,0 +1,88 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": false,
+        "designer|userClassName": "IniFileStore",
+        "model": "IniFileModel",
+        "storeId": "IniFileStore"
+    },
+    "configAlternates": {
+        "autoLoad": "boolean",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "designerId": "dbd2a0bb-4889-4fb4-9e1d-b2e796acd10c",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Rest",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "/softnas/snserver/snserv.php?opcode=readini"
+            },
+            "configAlternates": {
+                "url": "string"
+            },
+            "name": "MyRestProxy",
+            "designerId": "61d9d177-396d-41b5-8ca3-24ebc810985c",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "records"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "f2e3d283-b6ae-4a0f-93d0-9bcd361ad970"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onJsonstoreLoad",
+                "implHandler": [
+                    "var show_welcome = \"1\";",
+                    "if(records.length && records[0].data !== undefined && records[0].data.ini !== undefined && records[0].data.ini.gettingstarted !== undefined &&",
+                    "   records[0].data.ini.gettingstarted.showWelcomeOnStartup !== undefined){",
+                    "    show_welcome = records[0].data.ini.gettingstarted.showWelcomeOnStartup;",
+                    "}",
+                    "",
+                    "Ext.ComponentQuery.query('#checkShowWelcomeOnStartup')[0].setValue( (show_welcome == \"1\") ? true : false );",
+                    "window['ini_loaded'] = true;"
+                ],
+                "name": "load",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onJsonstoreLoad",
+            "designerId": "51f37298-70b9-4b67-8dbb-07b73519ef53"
+        }
+    ]
+}

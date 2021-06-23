@@ -1,0 +1,8 @@
+<?php
+
+$_config['db']['name'] = "REPLACETHISNAME";
+$_config['db']['host'] = "REPLACETHISHOST";
+$_config['db']['user'] = "REPLACETHISUSER";
+$_config['db']['pass'] = "REPLACETHISPASS";
+
+?>

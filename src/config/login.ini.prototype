@@ -1,0 +1,4 @@
+[login]
+timeout="30"
+session_folder="/tmp/softnas"
+encryption_key="Pass4W0rd"

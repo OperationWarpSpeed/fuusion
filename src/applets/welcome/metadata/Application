@@ -1,0 +1,65 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "controllers": [
+            "WelcomeController"
+        ],
+        "copyright": "Copyright (c) SoftNAS Inc. All Rights Reserved",
+        "models": [
+            "IniFileModel",
+            "LicenseModel"
+        ],
+        "name": "MyApp",
+        "stores": [
+            "IniFileStore",
+            "LicenseStore"
+        ],
+        "views": [
+            "MyViewport"
+        ]
+    },
+    "configAlternates": {
+        "controllers": "typedarray",
+        "copyright": "string",
+        "models": "typedarray",
+        "name": "string",
+        "stores": "typedarray",
+        "views": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "copyright",
+            "type": "string"
+        }
+    ],
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "window.WelcomeApp = this;"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "5e0f6420-666b-45d3-96e0-f3cc4612c08b"
+        }
+    ]
+}

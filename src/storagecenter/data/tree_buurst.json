@@ -1,0 +1,379 @@
+{
+  "copyright": "Copyright (c) SoftNAS Inc. All Rights Reserved",
+  "text": ".",
+  "children": [
+    {
+      "text": "",
+      "iconCls": "icon-nas",
+      "qtip": "SoftNAS&reg; StorageCenter&reg;",
+      "uri": "",
+      "expanded": true,
+      "children": [
+        {
+          "text": "Dashboard",
+          "qtip": "View real-time storage performance dashboard",
+          "iconCls": "icon-dashboard",
+          "uri": "../applets/dashboard/",
+          "hideModeOffsets": true,
+          "leaf": true
+        },
+        {
+          "text": "Getting Started",
+          "qtip": "Click here for help getting started",
+          "iconCls": "icon-gettingstarted",
+          "uri": "../applets/gettingstarted/",
+          "leaf": true
+        },
+        {
+          "text": "Storage",
+          "qtip": "Storage administration",
+          "iconCls": "icon-storage",
+          "expanded": true,
+          "children": [
+            {
+              "text": "Volumes and LUNs",
+              "qtip": "Administer Volumes, LUNs and Snapshots",
+              "iconCls": "icon-volume",
+              "uri": "../applets/volumes/",
+              "leaf": true
+            },
+            {
+              "text": "Storage Pools",
+              "qtip": "Administer Storage Pools, aggregates of disk devices",
+              "iconCls": "icon-pool",
+              "uri": "../applets/pools/",
+              "leaf": true
+            },
+            {
+              "text": "CIFS Shares",
+              "qtip": "Share a Volume with Windows file sharing using CIFS/SMB protocol",
+              "iconCls": "icon-shares",
+              "uri": "../applets/cifs/",
+              "leaf": true
+            },
+            {
+              "text": "NFS Exports &nbsp;",
+              "qtip": "Share a Volume with Network File System NFS protocol",
+              "iconCls": "icon-nfs",
+              "uri": "../html/webadmin.php?path=/exports/",
+              "leaf": true
+            },
+            {
+              "text": "AFP Volumes",
+              "qtip": "Share a Volume with AFP protocol",
+              "iconCls": "icon-shares",
+              "uri": "../html/webadmin.php?path=/netatalk3/",
+              "leaf": true
+            },
+            {
+              "text": "Disk Devices",
+              "qtip": "Disk device partitioning and configuration",
+              "iconCls": "icon-disk",
+              "uri": "../applets/diskdevices/",
+              "leaf": true
+            },
+            {
+              "text": "iSCSI LUN Targets",
+              "qtip": "Share block-device LUN Volumes as iSCSI targets using iSCSI protocol",
+              "iconCls": "icon-disk",
+              "uri": "../applets/iscsitarget/",
+              "id": "iscsitargetNode",
+              "leaf": true
+            },
+            {
+              "text": "iSCSI SAN Initiators",
+              "qtip": "Configure iSCSI initiators to connect remote SAN disks as iSCSI devices",
+              "iconCls": "icon-disk",
+              "uri": "../html/webadmin.php?path=/iscsi-client/",
+              "id": "iscsiinitiatorNode",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "SnapReplicate&trade; / SNAP HA ",
+          "qtip": "Configure block replication and mirroring",
+          "iconCls": "icon-replicate",
+          "uri": "../applets/snapreplicate/",
+          "id": "snapreplicateNode",
+          "leaf": true
+        },
+        {
+          "text": "Lift and Shift",
+          "qtip": "Lift and Shift",
+          "iconCls": "icon-cloud-blue",
+          "uri": "../applets/flexfiles#liftshift",
+          "id": "flexfilesLiftShiftNode",
+          "expanded": false,
+          "needEnableFlexfiles": true,
+          "platinum": true,
+          "children": [
+            {
+              "text": "Settings",
+              "qtip": "Settings",
+              "iconCls": "icon-settings",
+              "uri": "../applets/flexfiles#settings",
+              "id": "flexfilesSettingsNode",
+              "leaf": true,
+              "needEnableFlexfiles": true,
+              "platinum": true
+            }
+          ]
+        },
+        {
+          "text": "Settings",
+          "qtip": "Configure SoftNAS settings and options",
+          "iconCls": "icon-settings",
+          "expanded": false,
+          "leaf": false,
+          "children": [
+            {
+              "text": "Administrator",
+              "qtip": "General settings for the SoftNAS admin",
+              "iconCls": "administrator",
+              "uri": "../applets/administrator/",
+              "leaf": true
+            },
+            {
+              "text": "Schedules",
+              "qtip": "Configure and administer Schedules, which control when repetitive, automated tasks are carried out",
+              "iconCls": "icon-schedules",
+              "uri": "../applets/schedules/",
+              "id": "schedulesNode",
+              "leaf": true
+            },
+            {
+              "text": "Change Password",
+              "qtip": "Change user account passwords",
+              "iconCls": "icon-password",
+              "uri": "../html/webadmin.php?path=/passwd/",
+              "leaf": true
+            },
+            {
+              "text": "Identity and Access Control",
+              "qtip": "Configure identity management settings",
+              "iconCls": "icon-settings",
+              "expanded": false,
+              "leaf": false,
+              "children": [
+                {
+                  "text": "idmapd daemon",
+                  "qtip": "Mapping of UID/GID in NFS Exports",
+                  "iconCls": "icon-nfs",
+                  "uri": "../html/webadmin.php?path=/idmapd/",
+                  "leaf": true
+                },
+                {
+                  "text": "LDAP Server",
+                  "qtip": "Configuring the LDAP Server",
+                  "iconCls": "icon-ldap",
+                  "uri": "../html/webadmin.php?path=/ldap-server/",
+                  "leaf": true
+                },
+                {
+                  "text": "LDAP Client",
+                  "qtip": "Configuring LDAP Client",
+                  "iconCls": "icon-ldap",
+                  "uri": "../html/webadmin.php?path=/ldap-client/",
+                  "leaf": true
+                },
+                {
+                  "text": "Kerberos",
+                  "qtip": "Configure Kerberos for Active Directory",
+                  "iconCls": "icon-kerberos",
+                  "uri": "../html/webadmin.php?path=/krb5/",
+                  "id": "kerberosNode",
+                  "leaf": true
+                }
+              ]
+            },
+            {
+              "text": "Firewall",
+              "qtip": "Configure firewall settings",
+              "iconCls": "icon-firewall",
+              "uri": "../html/webadmin.php?path=/firewall/",
+              "leaf": true
+            },
+            {
+              "text": "Licensing",
+              "qtip": "View and administer SoftNAS licensing and enter license keys",
+              "iconCls": "icon-license",
+              "uri": "../applets/license/",
+              "leaf": true
+            },
+            {
+              "text": "Network Settings",
+              "qtip": "View and configure SoftNAS networking options",
+              "iconCls": "icon-network",
+              "uri": "../html/webadmin.php?path=/net/",
+              "leaf": true
+            },
+            {
+              "text": "General System Settings",
+              "qtip": "Access all Linux system administration functions",
+              "iconCls": "icon-systemsettings",
+              "uri": "../html/webadmin.php",
+              "leaf": true
+            },
+            {
+              "text": "System Services",
+              "iconCls": "icon-services",
+              "qtip": "View, start and stop system services",
+              "uri": "../html/webadmin.php?path=/init/",
+              "leaf": true
+            },
+            {
+              "text": "System Time",
+              "qtip": "Set system time, timezone and NTP settings",
+              "iconCls": "icon-time",
+              "uri": "../html/webadmin.php?path=/time/",
+              "leaf": true
+            },
+            {
+              "text": "Software Updates",
+              "qtip": "View current version and apply available software updates",
+              "iconCls": "icon-update",
+              "uri": "../applets/update/",
+              "leaf": true
+            },
+            {
+              "text": "User Accounts",
+              "qtip": "Create and manage user accounts",
+              "iconCls": "icon-users",
+              "uri": "../html/webadmin.php?path=/useradmin/",
+              "leaf": true
+            },
+            {
+              "text": "Backup/Restore",
+              "qtip": "Create and restore configuration backup archives",
+              "iconCls": "icon-users",
+              "uri": "../applets/backuprestore/",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "text": "Documentation",
+          "qtip": "Product documentation and help files",
+          "iconCls": "icon-docs",
+          "uri": "",
+          "leaf": false,
+          "expanded": false,
+          "children": [
+            {
+              "text": "Planning Your Instance",
+              "qtip": "Click here for help planning instance sizes",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Planning+Your+Instance",
+              "leaf": true
+            },
+            {
+              "text": "Creating Your Instance",
+              "qtip": "Click here for help creating instances",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Creating+Your+Instance",
+              "leaf": true
+            },
+            {
+              "text": "General Navigation",
+              "qtip": "Click here for help with the user interface",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/General+Navigation",
+              "leaf": true
+            },
+            {
+              "text": "Adding Storage",
+              "qtip": "Click here for help expanding capacity",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Adding+Storage",
+              "leaf": true
+            },
+            {
+              "text": "Creating and Managing Pools",
+              "qtip": "Click here for help creating storage pools",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Creating+and+Managing+Pools",
+              "leaf": true
+            },
+            {
+              "text": "Sharing Volumes",
+              "qtip": "Click here for help sharing volumes",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Sharing+Volumes",
+              "leaf": true
+            },
+            {
+              "text": "High Availability",
+              "qtip": "Click here for help configuring multiple nodes for high availability",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/High+Availability",
+              "leaf": true
+            },
+            {
+              "text": "Administration",
+              "qtip": "Click here for help managing StorageCenter",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Administration",
+              "leaf": true
+            },
+            {
+              "text": "Best Practices",
+              "qtip": "Click here for best practices and general tips on managing StorageCenter",
+              "iconCls": "icon-help",
+              "uri": "https://docs.softnas.com/display/SD/Best+Practices",
+              "leaf": true
+            },
+            {
+              "text": "Installation Guide (HTML)",
+              "qtip": "View installation guide documentation",
+              "iconCls": "icon-help",
+              "uri": "http://www.softnas.com/docs/softnas/v3/html/index.html",
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "text": "API Guide (HTML)",
+              "qtip": "View API documentation",
+              "iconCls": "icon-help",
+              "uri": "http://www.softnas.com/docs/softnas/v3/api-html/",
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "text": "SoftNAS CLI",
+              "qtip": "Download SoftNAS CLI",
+              "iconCls": "icon-gettingstarted",
+              "uri": "http://www.softnas.com/docs/softnas/v3/api/softnas-cmd.zip",
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "text": "HVM Cloud Formation Template",
+              "qtip": "Download HVM Cloud Formation Template",
+              "iconCls": "icon-gettingstarted",
+              "uri": "http://www.softnas.com/docs/softnas/v3/api/Softnas-AWSCloudTemplateHVM.json",
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "text": "Kerberos-LDAP-NFSv4 (PDF)",
+              "qtip": "View Kerberos-LDAP-NFSv4 documentation as PDF",
+              "iconCls": "icon-pdf",
+              "uri": "http://www.softnas.com/docs/softnas/v3/pdf-manuals/Kerberos-LDAP-NFSv4_v3.pdf",
+              "leaf": true,
+              "expanded": true
+            }
+          ]
+        },
+        {
+          "text": "Log out",
+          "qtip": "Log out of StorageCenter",
+          "iconCls": "icon-exit",
+          "uri": "logout.php",
+          "leaf": true,
+          "expanded": true
+        }
+      ]
+    }
+  ]
+}

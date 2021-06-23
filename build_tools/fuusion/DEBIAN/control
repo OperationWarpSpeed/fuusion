@@ -1,0 +1,7 @@
+Package: fuusion
+Section: custom
+Priority: optional
+Architecture: amd64
+Essential: no
+Installed-Size: 50M
+Maintainer: www.buurst.com

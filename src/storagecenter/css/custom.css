@@ -1,0 +1,152 @@
+.icon-nas 	{ background-image:url('../images/nas.png'); background-repeat: no-repeat; !important; }
+
+.x-grid-tree-node-expanded  .icon-nas 	{ background-image:url('../images/nas.png'); background-repeat: no-repeat; !important; }
+
+.icon-dashboard 	{ background-image:url('../images/dashboard.png'); background-repeat: no-repeat; !important; }
+
+.icon-gettingstarted 	{ background-image:url('../images/GettingStarted.png'); background-repeat: no-repeat; !important; }
+
+.icon-pro 	{ background-image:url('../images/profeature.png'); background-repeat: no-repeat; !important; }
+
+.icon-welcome 	{ background-image:url('../images/welcome.png'); background-repeat: no-repeat; !important; }
+
+.icon-update 	{ background-image:url('../images/update.png'); background-repeat: no-repeat; !important; }
+
+.icon-storage { background-image:url('../images/storage.png'); background-repeat: no-repeat; !important; }
+
+.x-grid-tree-node-expanded .icon-storage { background-image:url('../images/storage.png'); background-repeat: no-repeat; !important; }
+
+.icon-volume 	{ background-image:url('../images/volume2.png'); background-repeat: no-repeat; !important; }
+
+.icon-pool 	{ background-image:url('../images/pool3.png'); background-repeat: no-repeat; !important; }
+
+.icon-shares 	{ background-image:url('../images/shares.png'); background-repeat: no-repeat; !important; }
+
+.icon-nfs 	{ background-image:url('../images/nfs.png'); background-repeat: no-repeat; !important; }
+
+.icon-ftp 	{ background-image:url('../images/ftp.png'); background-repeat: no-repeat; !important; }
+
+.icon-disk 	{ background-image:url('../images/disk.png'); background-repeat: no-repeat; !important; }
+
+.icon-filesystem 	{ background-image:url('../images/filesystem.png'); background-repeat: no-repeat; !important; }
+
+.icon-replicate 	{ background-image:url('../images/replicate.png'); background-repeat: no-repeat; !important; }
+
+.icon-pyramid { background-image:url('../images/pyramid.png'); background-repeat: no-repeat; !important; }
+
+.x-grid-tree-node-expanded .icon-pyramid { background-image:url('../images/pyramid.png'); background-repeat: no-repeat; !important; }
+
+.icon-cloud-blue { background-image:url('../images/cloud-blue.png'); background-repeat: no-repeat; !important; }
+
+.icon-settings 	{ background-image:url('../images/settings.png'); background-repeat: no-repeat; !important; }
+
+.icon-ldap 	{ background-image:url('../images/ldap.png'); background-repeat: no-repeat; !important; }
+
+.x-grid-tree-node-expanded  .icon-settings 	{ background-image:url('../images/settings.png'); background-repeat: no-repeat; !important; }
+
+.icon-firewall 	{ background-image:url('../images/firewall.png'); background-repeat: no-repeat; !important; }
+
+.icon-kerberos 	{ background-image:url('../images/kerberos.png'); background-repeat: no-repeat; !important; }
+
+.icon-password 	{ background-image:url('../images/password.png'); background-repeat: no-repeat; !important; }
+
+.icon-schedules { background-image:url('../images/schedules.png'); background-repeat: no-repeat; !important; }
+
+.icon-license 	{ background-image:url('../images/license.png'); background-repeat: no-repeat; !important; }
+
+.icon-network 	{ background-image:url('../images/network.png'); background-repeat: no-repeat; !important; }
+
+.icon-time 	{ background-image:url('../images/time.png'); background-repeat: no-repeat; !important; }
+
+.icon-users 	{ background-image:url('../images/users.png'); background-repeat: no-repeat; !important; }
+
+.icon-services 	{ background-image:url('../images/services.png'); background-repeat: no-repeat; !important; }
+
+.icon-systemsettings 	{ background-image:url('../images/systemsettings.png'); background-repeat: no-repeat; !important; }
+
+.icon-help 	{ background-image:url('../images/help.png'); background-repeat: no-repeat; !important; }
+
+.x-grid-tree-node-expanded .icon-help 	{ background-image:url('../images/help.png'); background-repeat: no-repeat; !important; }
+
+.icon-exit 	{ background-image:url('../images/exitdoor.png'); background-repeat: no-repeat; !important; }
+
+.icon-pdf 	{ background-image:url('../images/pdf.png'); background-repeat: no-repeat; !important; }
+
+.administrator { background-image:url('../images/administrator.png'); background-repeat: no-repeat; !important; }
+
+
+#ProdRegWindow * { vertical-align: top !important; }
+
+.header-wrap > div{
+	display: inline-block;
+	width: 32%;
+}
+
+.softnas-title{
+	width:98%;
+	/*text-align:left;*/
+	text-align: center;
+	margin-left:auto;
+	margin-right:auto;
+	text-shadow:1px 1px 0 rgba(10,3,54,1);
+	font-weight:normal;
+	color:#030299;
+	letter-spacing:0pt;
+	word-spacing:3pt;
+	font-size:16px;
+	font-family:helvetica, sans-serif;
+	line-height:1;
+	white-space: nowrap;
+}
+
+.softnas-title.main-area{
+	/*width:450px;*/
+	padding: 6px 0 0 10px;
+}
+.softnas-title.bottom-area{
+	/*width:285px;*/
+	padding: 5px 0 0 0px;
+}
+
+.btn-prod {
+    display: inline-block;
+    cursor: pointer;
+    margin: 15px 5px 0px 0px;
+    padding: 2px 5px;
+    /*min-width: 150px;*/
+	border: 1px solid #4da6de;
+    border-radius: 5px;
+    color: #4da6de;
+}
+.btn-prod:HOVER { color: #ffffff; background-color: #4da6de; }
+.btn-prod-disabled {
+    display: inline-block;
+    cursor: default;
+    margin: -3px 0 4px;
+    padding: 2px 5px;
+    /*min-width: 150px;*/
+	border: 1px solid #dddddd;
+    border-radius: 5px;
+    color: #dddddd;
+}
+
+/* Live Support toggle button */
+.live-support-toolbar {
+	background: #fff;
+	border-color: #4da6de;
+	border-radius: 5px;
+	padding: 0px;
+	height: 18px;
+	cursor: default;
+	left: 3px !important;
+}
+
+.live-support-toolbar .x-toolbar-text {
+	color: #4da6de;
+	font-size: 12px;
+	top: 3px !important;
+}
+
+.live-support-toolbar .x-box-inner {
+	margin-top: -3px;
+}

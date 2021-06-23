@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "featurerequestwindow",
+        "designer|userClassName": "FeatureRequestWindowViewModel"
+    },
+    "designerId": "274b55ea-0819-437c-831f-87705b2ca405"
+}

@@ -1,0 +1,1965 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "closeAction": "hide",
+        "designer|userAlias": "prodregwindow",
+        "designer|userClassName": "ProdRegWindow",
+        "height": null,
+        "id": "ProdRegWindow",
+        "itemId": "ProdRegWindow",
+        "modal": true,
+        "title": "Product Registration",
+        "width": 720
+    },
+    "configAlternates": {
+        "scrollable": "boolean",
+        "closeAction": "string",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "height": "auto",
+        "id": "string",
+        "itemId": "string",
+        "modal": "boolean",
+        "title": "string",
+        "width": "auto"
+    },
+    "name": "MyWindow",
+    "designerId": "b6b1f67e-90f7-4aa1-b8bc-96cdc99954b3",
+    "viewControllerInstanceId": "c7283603-911e-40eb-8cea-dbd138b5a25e",
+    "viewModelInstanceId": "60b82bed-3b36-4f72-9f03-a3d1ef034b7e",
+    "cn": [
+        {
+            "type": "Ext.form.FieldContainer",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "dock": null,
+                "fieldLabel": "",
+                "height": "100%",
+                "layout": "vbox",
+                "minHeight": null,
+                "width": 702
+            },
+            "configAlternates": {
+                "scrollable": "boolean",
+                "container|align": "string",
+                "dock": "string",
+                "fieldLabel": "string",
+                "height": "auto",
+                "layout": "string",
+                "minHeight": "number",
+                "width": "auto"
+            },
+            "name": "MyFieldContainer",
+            "designerId": "23607f3a-8f67-4caf-950c-b1fc48073a9a",
+            "cn": [
+                {
+                    "type": "Ext.form.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 47,
+                        "html": "<span style='color:#f94e4e;'> Registration is required to receive free, unlimited, business hours support. <br/> This also qualifies you to receive support during your product trial.  </span> <br/> <a src=\"https://www.buurst.com/wp/support\" target=\"_blank\" style=\"cursor:pointer;\" onclick=\"javascript:window.open('https://www.buurst.com/wp/support');\"> https://www.buurst.com/support/</a>",
+                        "itemId": "topLabel",
+                        "layout|flex": null,
+                        "margin": 10,
+                        "minHeight": null,
+                        "text": null
+                    },
+                    "configAlternates": {
+                        "scrollable": "boolean",
+                        "height": "auto",
+                        "html": "string",
+                        "itemId": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "minHeight": "number",
+                        "text": "string"
+                    },
+                    "name": "MyLabel",
+                    "designerId": "0afec483-23d0-445f-8839-d70630655e79"
+                },
+                {
+                    "type": "Ext.form.FieldContainer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "",
+                        "height": 296,
+                        "layout": "hbox",
+                        "layout|flex": null,
+                        "width": null
+                    },
+                    "configAlternates": {
+                        "scrollable": "boolean",
+                        "container|align": "string",
+                        "fieldLabel": "string",
+                        "height": "auto",
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "width": "auto"
+                    },
+                    "name": "MyFieldContainer1",
+                    "designerId": "162f78af-2771-45b8-83b7-670228a54b21",
+                    "cn": [
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "stretch",
+                                "container|padding": null,
+                                "fieldLabel": "Your profile",
+                                "height": 274,
+                                "labelAlign": "top",
+                                "layout": "vbox",
+                                "layout|flex": 1,
+                                "layout|margins": null,
+                                "margin": "2 8 2 15",
+                                "width": 630
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "container|align": "string",
+                                "container|padding": "auto",
+                                "fieldLabel": "string",
+                                "height": "auto",
+                                "labelAlign": "string",
+                                "layout": "string",
+                                "layout|flex": "number",
+                                "layout|margins": "string",
+                                "margin": "auto",
+                                "width": "auto"
+                            },
+                            "name": "MyFieldContainer2",
+                            "designerId": "68c65414-4426-4367-ad1b-9a221bb3da1e",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "First Name",
+                                        "itemId": "prodRegFirstName",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 50,
+                                        "regex": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex"
+                                    },
+                                    "name": "MyTextField",
+                                    "designerId": "4f01748c-227c-459b-9ffb-b6abc1597a63"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "Last Name",
+                                        "itemId": "prodRegLastName",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 50,
+                                        "regex": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex"
+                                    },
+                                    "name": "MyTextField1",
+                                    "designerId": "48114bb2-e909-4c6e-a714-e3ac6c60f3ac"
+                                },
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "editable": false,
+                                        "fieldLabel": "Job Function",
+                                        "itemId": "prodRegJobFunction",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "store": [
+                                            "[",
+                                            "['01', 'Business - Management'],",
+                                            "['02', 'Business - Analyst'],",
+                                            "['03', 'Business - Staff'],",
+                                            "['04', 'IT - App Dev Management'],",
+                                            "['05', 'IT - Software Architect'],",
+                                            "['06', 'IT - Developer'],",
+                                            "['07', 'IT - BI/DW Management'],",
+                                            "['08', 'IT - Data Architect'],",
+                                            "['09', 'IT - Report Writer'],",
+                                            "['10', 'IT - Management'],",
+                                            "['11', 'IT - Operations'],",
+                                            "['12', 'IT - Product Management'],",
+                                            "['13', 'IT - DBA'],",
+                                            "['14', 'Software Dev - Management'],",
+                                            "['15', 'Software Dev - Architect'],",
+                                            "['16', 'Software Dev - Product Manager'],",
+                                            "['17', 'Software Dev - Developer'],",
+                                            "['18', 'Consultant'],",
+                                            "['19', 'Partner'],",
+                                            "['20', 'Student/Researcher'],",
+                                            "['21', 'Other']",
+                                            "]"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "store": "array",
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "editable": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number"
+                                    },
+                                    "name": "MyComboBox",
+                                    "designerId": "d7367c21-bed1-4f2b-bb9b-41169d6d7dc3"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Job Title",
+                                        "itemId": "prodRegJobTitle",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 50,
+                                        "regex": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex"
+                                    },
+                                    "name": "MyTextField2",
+                                    "designerId": "f76d2814-1ab4-4fb2-ab53-6782d1846554"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "Business Phone",
+                                        "itemId": "prodRegBusinessPhone",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 20,
+                                        "regex": null,
+                                        "vtype": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex",
+                                        "vtype": "string"
+                                    },
+                                    "name": "MyTextField3",
+                                    "designerId": "348f3077-d39e-44b0-b6d7-180a57832013"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "Business Email",
+                                        "itemId": "prodRegBusinessEmail",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 100,
+                                        "vtype": "email"
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "vtype": "string"
+                                    },
+                                    "name": "MyTextField4",
+                                    "designerId": "154f9a68-351c-47da-a024-d5a058393750",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegBusinessEmailBlur",
+                                                "implHandler": [
+                                                    "var prodRegWnd = this;",
+                                                    "var email = prodRegWnd.query(\"#prodRegBusinessEmail\")[0].getValue();",
+                                                    "var company = prodRegWnd.query(\"#prodRegCompany\")[0].getValue();",
+                                                    "var check_new_account = prodRegWnd.query(\"#prodRegCreateAccount\")[0];",
+                                                    "var btn_submit = prodRegWnd.query(\"#prodRegBtnSubmit\")[0];",
+                                                    "",
+                                                    "if(window['prodreg_info'].platform != 'amazon' && window['prodreg_info'].platform != 'VM')",
+                                                    "{",
+                                                    "    var email_domain = email.substr(email.indexOf('@') + 1);",
+                                                    "    prodRegWnd.query(\"#prodRegAccountId\")[0].setValue(email_domain);",
+                                                    "    window['prodreg_info'].business_email = email_domain;",
+                                                    "}",
+                                                    "",
+                                                    "if(email == \"\"){",
+                                                    "    check_new_account.enable();",
+                                                    "    btn_submit.enable();",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "Ext.Ajax.request({",
+                                                    "    url: iFrame.request_url,",
+                                                    "    scope: this,",
+                                                    "    method : 'POST',",
+                                                    "    params : {",
+                                                    "        opcode: 'registration_exists',",
+                                                    "",
+                                                    "        prodRegBusinessEmail: email,",
+                                                    "        prodRegCompany: company",
+                                                    "    },",
+                                                    "    timeout: 10000,",
+                                                    "",
+                                                    "    success: function(response, opts) {",
+                                                    "        data = JSON.parse(response.responseText);",
+                                                    "        rec = data.records;",
+                                                    "        //console.log('data: ', data);",
+                                                    "",
+                                                    "        if(rec.user_exisits != false && rec.user_exisits != 'null' && rec.user_exisits != null){",
+                                                    "            check_new_account.disable();",
+                                                    "            check_new_account.setValue(false);",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegPassword\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegPasswordConfirm\")[0].disable();",
+                                                    "",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegFirstName\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegLastName\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegJobFunction\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegJobTitle\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegBusinessPhone\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCompany\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegIndustry\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegAddress1\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegAddress2\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCity\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCountry\")[0].disable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegZip\")[0].disable();",
+                                                    "            ",
+                                                    "            ",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegFirstName\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegLastName\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegJobFunction\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegBusinessPhone\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCompany\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegIndustry\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegAddress1\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCity\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCountry\")[0].allowBlank = true;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegZip\")[0].allowBlank = true;",
+                                                    "",
+                                                    "            btn_submit.enable();",
+                                                    "        }else{",
+                                                    "            check_new_account.enable();",
+                                                    "            ",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegFirstName\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegLastName\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegJobFunction\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegJobTitle\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegBusinessPhone\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCompany\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegIndustry\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegAddress1\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegAddress2\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCity\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCountry\")[0].enable();",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegZip\")[0].enable();",
+                                                    "            ",
+                                                    "            ",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegFirstName\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegLastName\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegJobFunction\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegBusinessPhone\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCompany\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegIndustry\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegAddress1\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCity\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegCountry\")[0].allowBlank = false;",
+                                                    "            Ext.ComponentQuery.query(\"#prodRegZip\")[0].allowBlank = false;",
+                                                    "            ",
+                                                    "            this.onProdRegCreateAccountChange();",
+                                                    "        }",
+                                                    "",
+                                                    "        if(rec.company_exisits != false && rec.company_exisits != 'null' && rec.company_exisits != null){",
+                                                    "            // TODO Company not exists",
+                                                    "        }else{",
+                                                    "            // TODO Company already exists",
+                                                    "        }",
+                                                    "",
+                                                    "",
+                                                    "    },",
+                                                    "    failure: function(response, opts) {",
+                                                    "        console.log(response, opts.params);",
+                                                    "    }",
+                                                    "});"
+                                                ],
+                                                "name": "blur",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegBusinessEmailBlur",
+                                            "designerId": "6a366f45-7ca3-4f26-bb59-c86f05827dc2"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.field.Checkbox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "boxLabel": "I do not have a Support Account. Please Create",
+                                        "fieldLabel": "",
+                                        "itemId": "prodRegCreateAccount",
+                                        "layout|flex": null,
+                                        "margin": "15 0 15 5"
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "boxLabel": "string",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "layout|flex": "number",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyCheckbox2",
+                                    "designerId": "e282e376-4600-4240-8138-7ff3aefde692",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegCreateAccountChange",
+                                                "implHandler": [
+                                                    "var prodRegWnd = this;",
+                                                    "var checkedval = prodRegWnd.query(\"#prodRegCreateAccount\")[0].getValue();",
+                                                    "if(checkedval === true || prodRegWnd.query(\"#prodRegCreateAccount\")[0].isDisabled()){",
+                                                    "    prodRegWnd.query(\"#prodRegPassword\")[0].enable();",
+                                                    "    prodRegWnd.query(\"#prodRegPasswordConfirm\")[0].enable();",
+                                                    "    this.onProdRegPasswordChange();",
+                                                    "}else{",
+                                                    "    prodRegWnd.query(\"#prodRegPassword\")[0].disable();",
+                                                    "    prodRegWnd.query(\"#prodRegPasswordConfirm\")[0].disable();",
+                                                    "    Ext.ComponentQuery.query(\"#prodRegBtnSubmit\")[0].enable();",
+                                                    "}"
+                                                ],
+                                                "name": "change",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegCreateAccountChange",
+                                            "designerId": "9dba0fd8-c110-440c-b35d-8ac4cd4e3a28"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "disabled": true,
+                                        "fieldLabel": "Password",
+                                        "inputType": "password",
+                                        "itemId": "prodRegPassword",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 100,
+                                        "minLength": 5
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "disabled": "boolean",
+                                        "fieldLabel": "string",
+                                        "inputType": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "minLength": "number"
+                                    },
+                                    "name": "MyTextField12",
+                                    "designerId": "6ea1319c-0d32-4fd0-8308-057b6d48d41a",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegPasswordChange",
+                                                "implHandler": [
+                                                    "var create_account = Ext.ComponentQuery.query(\"#prodRegCreateAccount\")[0];",
+                                                    "var btn = Ext.ComponentQuery.query(\"#prodRegBtnSubmit\")[0];",
+                                                    "if(create_account.isDisabled() || create_account.getValue() == false){",
+                                                    "    btn.enable();",
+                                                    "    return;",
+                                                    "}",
+                                                    "var txt_pwd = Ext.ComponentQuery.query(\"#prodRegPassword\")[0],",
+                                                    "    pwd = txt_pwd.getValue(),",
+                                                    "    pwd2 = Ext.ComponentQuery.query(\"#prodRegPasswordConfirm\")[0].getValue();",
+                                                    "if(pwd == pwd2 && pwd !== \"\" && pwd2 !== \"\" && txt_pwd.isValid()){",
+                                                    "    btn.enable();",
+                                                    "}else{",
+                                                    "    btn.disable();",
+                                                    "}"
+                                                ],
+                                                "name": "change",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegPasswordChange",
+                                            "designerId": "605e13b7-149b-4a08-b1a5-5288aaaa8736"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "disabled": true,
+                                        "fieldLabel": "Confirm Password",
+                                        "inputType": "password",
+                                        "itemId": "prodRegPasswordConfirm",
+                                        "labelAlign": "right",
+                                        "labelWidth": 115,
+                                        "layout|flex": null,
+                                        "maxLength": 100,
+                                        "minLength": 5
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "disabled": "boolean",
+                                        "fieldLabel": "string",
+                                        "inputType": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "minLength": "number"
+                                    },
+                                    "name": "MyTextField13",
+                                    "designerId": "61829d5d-8e7a-401a-81dc-eaed0883311a",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegPasswordConfirmChange",
+                                                "implHandler": [
+                                                    "this.onProdRegPasswordChange();"
+                                                ],
+                                                "name": "change",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegPasswordConfirmChange",
+                                            "designerId": "7fcb0bd8-16de-49a8-b1a5-89a95c72ce59"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "stretch",
+                                "fieldLabel": "Your Company",
+                                "height": 120,
+                                "labelAlign": "top",
+                                "layout": "vbox",
+                                "layout|flex": 1,
+                                "margin": "2 10 2 1",
+                                "width": 326
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "container|align": "string",
+                                "fieldLabel": "string",
+                                "height": "auto",
+                                "labelAlign": "string",
+                                "layout": "string",
+                                "layout|flex": "number",
+                                "margin": "auto",
+                                "width": "auto"
+                            },
+                            "name": "MyFieldContainer3",
+                            "designerId": "ace93b9e-b48a-4cdb-af08-7907630224e3",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Platform",
+                                        "id": "prodRegPlatformName",
+                                        "itemId": "prodRegPlatformName",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": 1,
+                                        "readOnly": true,
+                                        "tabIndex": -1
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "fieldLabel": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "readOnly": "boolean",
+                                        "tabIndex": "number"
+                                    },
+                                    "name": "MyTextField15",
+                                    "designerId": "474d3fd8-49fc-4322-b0f0-8bf3956a25a4"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "border": null,
+                                        "fieldLabel": "Account ID",
+                                        "fieldStyle": "",
+                                        "itemId": "prodRegAccountId",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "readOnly": true,
+                                        "tabIndex": -1
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "border": "auto",
+                                        "fieldLabel": "string",
+                                        "fieldStyle": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "readOnly": "boolean",
+                                        "tabIndex": "number"
+                                    },
+                                    "name": "MyTextField10",
+                                    "designerId": "f55cfb78-73b8-4623-b60f-78f0f341b66c"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Instance ID",
+                                        "fieldStyle": "",
+                                        "itemId": "prodRegInstanceId",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": 1,
+                                        "readOnly": true,
+                                        "tabIndex": -1
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "fieldLabel": "string",
+                                        "fieldStyle": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "readOnly": "boolean",
+                                        "tabIndex": "number"
+                                    },
+                                    "name": "MyTextField14",
+                                    "designerId": "911d368d-4a72-468a-b82d-b860c3df8682"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "Company",
+                                        "itemId": "prodRegCompany",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "maxLength": 100,
+                                        "regex": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex"
+                                    },
+                                    "name": "MyTextField5",
+                                    "designerId": "69e98c56-9931-4839-a4c1-1541bd42cabd",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegCompanyBlur",
+                                                "implHandler": [
+                                                    "this.onProdRegBusinessEmailBlur();"
+                                                ],
+                                                "name": "blur",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegCompanyBlur",
+                                            "designerId": "ad10478c-e30e-4ad4-931b-3be6a4b800ba"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "editable": false,
+                                        "fieldLabel": "Industry",
+                                        "itemId": "prodRegIndustry",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "store": [
+                                            "[",
+                                            "['01', 'Agriculture, Forestry & Fishing'],",
+                                            "['02', 'Banking, Finance & Insurance'],",
+                                            "['03', 'Business Services'],",
+                                            "['04', 'Communications'],",
+                                            "['05', 'Construction'],",
+                                            "['06', 'Education - Higher Education'],",
+                                            "['07', 'Education - Primary & Secondary'],",
+                                            "['08', 'Energy & Mining'],",
+                                            "['09', 'Government - Federal / National'],",
+                                            "['10', 'Government - Local'],",
+                                            "['11', 'Government - Provincional'],",
+                                            "['12', 'Healthcare'],",
+                                            "['13', 'High Tech'],",
+                                            "['14', 'Life Sciences'],",
+                                            "['15', 'Manufacturing - Discrete'],",
+                                            "['16', 'Manufacturing - Process'],",
+                                            "['17', 'Media & Entertainment'],",
+                                            "['18', 'Pharmaceutical'],",
+                                            "['19', 'Retail & Wholesale'],",
+                                            "['20', 'Services'],",
+                                            "['21', 'Transportation'],",
+                                            "['22', 'Utilities'],",
+                                            "['23', 'Other']",
+                                            "]"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "store": "array",
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "editable": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number"
+                                    },
+                                    "name": "MyComboBox1",
+                                    "designerId": "c05e102d-ab92-45d0-9c62-95226f62cded"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "Address 1",
+                                        "itemId": "prodRegAddress1",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "maxLength": 50,
+                                        "regex": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex"
+                                    },
+                                    "name": "MyTextField6",
+                                    "designerId": "20ba4499-6236-4b75-a12f-c4275c9f2005"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Address 2",
+                                        "itemId": "prodRegAddress2",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "maxLength": 50,
+                                        "regex": null,
+                                        "vtype": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex",
+                                        "vtype": "string"
+                                    },
+                                    "name": "MyTextField7",
+                                    "designerId": "61c64917-a6b0-45ae-b54d-0c386eeb99c4"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "City",
+                                        "itemId": "prodRegCity",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "maxLength": 50,
+                                        "regex": null,
+                                        "vtype": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex",
+                                        "vtype": "string"
+                                    },
+                                    "name": "MyTextField8",
+                                    "designerId": "b57d14ee-d037-4bbc-8da5-5ac87cfa73bc"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "fieldLabel": "Zip or Postal Code",
+                                        "itemId": "prodRegZip",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "maxLength": 15,
+                                        "regex": null,
+                                        "width": null
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxLength": "number",
+                                        "regex": "regex",
+                                        "width": "auto"
+                                    },
+                                    "name": "MyTextField9",
+                                    "designerId": "37f56746-2a98-41a0-8cac-8a0025fd2a1e"
+                                },
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "allowBlank": false,
+                                        "editable": false,
+                                        "fieldLabel": "State / Country",
+                                        "itemId": "prodRegCountry",
+                                        "labelAlign": "right",
+                                        "labelWidth": 125,
+                                        "layout|flex": null,
+                                        "maxHeight": null,
+                                        "store": [
+                                            "[",
+                                            "['AL', 'Alabama'],",
+                                            "['AK', 'Alaska'],",
+                                            "['AZ', 'Arizona'],",
+                                            "['AR', 'Arkansas'],",
+                                            "['CA', 'California'],",
+                                            "['CO', 'Colorado'],",
+                                            "['CT', 'Connecticut'],",
+                                            "['DE', 'Delaware'],",
+                                            "['DC', 'District Of Columbia'],",
+                                            "['FL', 'Florida'],",
+                                            "['GA', 'Georgia'],",
+                                            "['HI', 'Hawaii'],",
+                                            "['ID', 'Idaho'],",
+                                            "['IL', 'Illinois'],",
+                                            "['IN', 'Indiana'],",
+                                            "['IA', 'Iowa'],",
+                                            "['KS', 'Kansas'],",
+                                            "['KY', 'Kentucky'],",
+                                            "['LA', 'Louisiana'],",
+                                            "['ME', 'Maine'],",
+                                            "['MD', 'Maryland'],",
+                                            "['MA', 'Massachusetts'],",
+                                            "['MI', 'Michigan'],",
+                                            "['MN', 'Minnesota'],",
+                                            "['MS', 'Mississippi'],",
+                                            "['MO', 'Missouri'],",
+                                            "['MT', 'Montana'],",
+                                            "['NE', 'Nebraska'],",
+                                            "['NV', 'Nevada'],",
+                                            "['NH', 'New Hampshire'],",
+                                            "['NJ', 'New Jersey'],",
+                                            "['NM', 'New Mexico'],",
+                                            "['NY', 'New York'],",
+                                            "['NC', 'North Carolina'],",
+                                            "['ND', 'North Dakota'],",
+                                            "['OH', 'Ohio'],",
+                                            "['OK', 'Oklahoma'],",
+                                            "['OR', 'Oregon'],",
+                                            "['PA', 'Pennsylvania'],",
+                                            "['RI', 'Rhode Island'],",
+                                            "['SC', 'South Carolina'],",
+                                            "['SD', 'South Dakota'],",
+                                            "['TN', 'Tennessee'],",
+                                            "['TX', 'Texas'],",
+                                            "['UT', 'Utah'],",
+                                            "['VT', 'Vermont'],",
+                                            "['VA', 'Virginia'],",
+                                            "['WA', 'Washington'],",
+                                            "['WV', 'West Virginia'],",
+                                            "['WI', 'Wisconsin'],",
+                                            "['WY', 'Wyoming'],",
+                                            "['AF', 'Afghanistan'],",
+                                            "['AL', 'Albania'],",
+                                            "['DZ', 'Algeria'],",
+                                            "['AS', 'American Samoa'],",
+                                            "['AD', 'Andorra'],",
+                                            "['AO', 'Angola'],",
+                                            "['AI', 'Anguilla'],",
+                                            "['AQ', 'Antarctica'],",
+                                            "['AG', 'Antigua and Barbuda'],",
+                                            "['AR', 'Argentina'],",
+                                            "['AM', 'Armenia'],",
+                                            "['AW', 'Aruba'],",
+                                            "['AU', 'Australia'],",
+                                            "['AT', 'Austria'],",
+                                            "['AZ', 'Azerbaijan'],",
+                                            "['BS', 'Bahamas'],",
+                                            "['BH', 'Bahrain'],",
+                                            "['BD', 'Bangladesh'],",
+                                            "['BB', 'Barbados'],",
+                                            "['BY', 'Belarus'],",
+                                            "['BE', 'Belgium'],",
+                                            "['BZ', 'Belize'],",
+                                            "['BJ', 'Benin'],",
+                                            "['BM', 'Bermuda'],",
+                                            "['BT', 'Bhutan'],",
+                                            "['BO', 'Bolivia'],",
+                                            "['BA', 'Bosnia and Herzegovina'],",
+                                            "['BW', 'Botswana'],",
+                                            "['BV', 'Bouvet Island'],",
+                                            "['BR', 'Brazil'],",
+                                            "['BQ', 'British Antarctic Territory'],",
+                                            "['IO', 'British Indian Ocean Territory'],",
+                                            "['VG', 'British Virgin Islands'],",
+                                            "['BN', 'Brunei'],",
+                                            "['BG', 'Bulgaria'],",
+                                            "['BF', 'Burkina Faso'],",
+                                            "['BI', 'Burundi'],",
+                                            "['KH', 'Cambodia'],",
+                                            "['CM', 'Cameroon'],",
+                                            "['CA', 'Canada'],",
+                                            "['CT', 'Canton and Enderbury Islands'],",
+                                            "['CV', 'Cape Verde'],",
+                                            "['KY', 'Cayman Islands'],",
+                                            "['CF', 'Central African Republic'],",
+                                            "['TD', 'Chad'],",
+                                            "['CL', 'Chile'],",
+                                            "['CN', 'China'],",
+                                            "['CX', 'Christmas Island'],",
+                                            "['CC', 'Cocos [Keeling] Islands'],",
+                                            "['CO', 'Colombia'],",
+                                            "['KM', 'Comoros'],",
+                                            "['CG', 'Congo - Brazzaville'],",
+                                            "['CD', 'Congo - Kinshasa'],",
+                                            "['CK', 'Cook Islands'],",
+                                            "['CR', 'Costa Rica'],",
+                                            "['HR', 'Croatia'],",
+                                            "['CU', 'Cuba'],",
+                                            "['CY', 'Cyprus'],",
+                                            "['CZ', 'Czech Republic'],",
+                                            "['CI', 'Côte d’Ivoire'],",
+                                            "['DK', 'Denmark'],",
+                                            "['DJ', 'Djibouti'],",
+                                            "['DM', 'Dominica'],",
+                                            "['DO', 'Dominican Republic'],",
+                                            "['NQ', 'Dronning Maud Land'],",
+                                            "['DD', 'East Germany'],",
+                                            "['EC', 'Ecuador'],",
+                                            "['EG', 'Egypt'],",
+                                            "['SV', 'El Salvador'],",
+                                            "['GQ', 'Equatorial Guinea'],",
+                                            "['ER', 'Eritrea'],",
+                                            "['EE', 'Estonia'],",
+                                            "['ET', 'Ethiopia'],",
+                                            "['FK', 'Falkland Islands'],",
+                                            "['FO', 'Faroe Islands'],",
+                                            "['FJ', 'Fiji'],",
+                                            "['FI', 'Finland'],",
+                                            "['FR', 'France'],",
+                                            "['GF', 'French Guiana'],",
+                                            "['PF', 'French Polynesia'],",
+                                            "['TF', 'French Southern Territories'],",
+                                            "['FQ', 'French Southern and Antarctic Territories'],",
+                                            "['GA', 'Gabon'],",
+                                            "['GM', 'Gambia'],",
+                                            "['GE', 'Georgia'],",
+                                            "['DE', 'Germany'],",
+                                            "['GH', 'Ghana'],",
+                                            "['GI', 'Gibraltar'],",
+                                            "['GR', 'Greece'],",
+                                            "['GL', 'Greenland'],",
+                                            "['GD', 'Grenada'],",
+                                            "['GP', 'Guadeloupe'],",
+                                            "['GU', 'Guam'],",
+                                            "['GT', 'Guatemala'],",
+                                            "['GG', 'Guernsey'],",
+                                            "['GN', 'Guinea'],",
+                                            "['GW', 'Guinea-Bissau'],",
+                                            "['GY', 'Guyana'],",
+                                            "['HT', 'Haiti'],",
+                                            "['HM', 'Heard Island and McDonald Islands'],",
+                                            "['HN', 'Honduras'],",
+                                            "['HK', 'Hong Kong SAR China'],",
+                                            "['HU', 'Hungary'],",
+                                            "['IS', 'Iceland'],",
+                                            "['IN', 'India'],",
+                                            "['ID', 'Indonesia'],",
+                                            "['IR', 'Iran'],",
+                                            "['IQ', 'Iraq'],",
+                                            "['IE', 'Ireland'],",
+                                            "['IM', 'Isle of Man'],",
+                                            "['IL', 'Israel'],",
+                                            "['IT', 'Italy'],",
+                                            "['JM', 'Jamaica'],",
+                                            "['JP', 'Japan'],",
+                                            "['JE', 'Jersey'],",
+                                            "['JT', 'Johnston Island'],",
+                                            "['JO', 'Jordan'],",
+                                            "['KZ', 'Kazakhstan'],",
+                                            "['KE', 'Kenya'],",
+                                            "['KI', 'Kiribati'],",
+                                            "['KW', 'Kuwait'],",
+                                            "['KG', 'Kyrgyzstan'],",
+                                            "['LA', 'Laos'],",
+                                            "['LV', 'Latvia'],",
+                                            "['LB', 'Lebanon'],",
+                                            "['LS', 'Lesotho'],",
+                                            "['LR', 'Liberia'],",
+                                            "['LY', 'Libya'],",
+                                            "['LI', 'Liechtenstein'],",
+                                            "['LT', 'Lithuania'],",
+                                            "['LU', 'Luxembourg'],",
+                                            "['MO', 'Macau SAR China'],",
+                                            "['MK', 'Macedonia'],",
+                                            "['MG', 'Madagascar'],",
+                                            "['MW', 'Malawi'],",
+                                            "['MY', 'Malaysia'],",
+                                            "['MV', 'Maldives'],",
+                                            "['ML', 'Mali'],",
+                                            "['MT', 'Malta'],",
+                                            "['MH', 'Marshall Islands'],",
+                                            "['MQ', 'Martinique'],",
+                                            "['MR', 'Mauritania'],",
+                                            "['MU', 'Mauritius'],",
+                                            "['YT', 'Mayotte'],",
+                                            "['FX', 'Metropolitan France'],",
+                                            "['MX', 'Mexico'],",
+                                            "['FM', 'Micronesia'],",
+                                            "['MI', 'Midway Islands'],",
+                                            "['MD', 'Moldova'],",
+                                            "['MC', 'Monaco'],",
+                                            "['MN', 'Mongolia'],",
+                                            "['ME', 'Montenegro'],",
+                                            "['MS', 'Montserrat'],",
+                                            "['MA', 'Morocco'],",
+                                            "['MZ', 'Mozambique'],",
+                                            "['MM', 'Myanmar [Burma]'],",
+                                            "['NA', 'Namibia'],",
+                                            "['NR', 'Nauru'],",
+                                            "['NP', 'Nepal'],",
+                                            "['NL', 'Netherlands'],",
+                                            "['AN', 'Netherlands Antilles'],",
+                                            "['NT', 'Neutral Zone'],",
+                                            "['NC', 'New Caledonia'],",
+                                            "['NZ', 'New Zealand'],",
+                                            "['NI', 'Nicaragua'],",
+                                            "['NE', 'Niger'],",
+                                            "['NG', 'Nigeria'],",
+                                            "['NU', 'Niue'],",
+                                            "['NF', 'Norfolk Island'],",
+                                            "['KP', 'North Korea'],",
+                                            "['VD', 'North Vietnam'],",
+                                            "['MP', 'Northern Mariana Islands'],",
+                                            "['NO', 'Norway'],",
+                                            "['OM', 'Oman'],",
+                                            "['PC', 'Pacific Islands Trust Territory'],",
+                                            "['PK', 'Pakistan'],",
+                                            "['PW', 'Palau'],",
+                                            "['PS', 'Palestinian Territories'],",
+                                            "['PA', 'Panama'],",
+                                            "['PZ', 'Panama Canal Zone'],",
+                                            "['PG', 'Papua New Guinea'],",
+                                            "['PY', 'Paraguay'],",
+                                            "['YD', 'People\\'s Democratic Republic of Yemen'],",
+                                            "['PE', 'Peru'],",
+                                            "['PH', 'Philippines'],",
+                                            "['PN', 'Pitcairn Islands'],",
+                                            "['PL', 'Poland'],",
+                                            "['PT', 'Portugal'],",
+                                            "['PR', 'Puerto Rico'],",
+                                            "['QA', 'Qatar'],",
+                                            "['RO', 'Romania'],",
+                                            "['RU', 'Russia'],",
+                                            "['RW', 'Rwanda'],",
+                                            "['RE', 'Réunion'],",
+                                            "['BL', 'Saint Barthélemy'],",
+                                            "['SH', 'Saint Helena'],",
+                                            "['KN', 'Saint Kitts and Nevis'],",
+                                            "['LC', 'Saint Lucia'],",
+                                            "['MF', 'Saint Martin'],",
+                                            "['PM', 'Saint Pierre and Miquelon'],",
+                                            "['VC', 'Saint Vincent and the Grenadines'],",
+                                            "['WS', 'Samoa'],",
+                                            "['SM', 'San Marino'],",
+                                            "['SA', 'Saudi Arabia'],",
+                                            "['SN', 'Senegal'],",
+                                            "['RS', 'Serbia'],",
+                                            "['CS', 'Serbia and Montenegro'],",
+                                            "['SC', 'Seychelles'],",
+                                            "['SL', 'Sierra Leone'],",
+                                            "['SG', 'Singapore'],",
+                                            "['SK', 'Slovakia'],",
+                                            "['SI', 'Slovenia'],",
+                                            "['SB', 'Solomon Islands'],",
+                                            "['SO', 'Somalia'],",
+                                            "['ZA', 'South Africa'],",
+                                            "['GS', 'South Georgia and the South Sandwich Islands'],",
+                                            "['KR', 'South Korea'],",
+                                            "['ES', 'Spain'],",
+                                            "['LK', 'Sri Lanka'],",
+                                            "['SD', 'Sudan'],",
+                                            "['SR', 'Suriname'],",
+                                            "['SJ', 'Svalbard and Jan Mayen'],",
+                                            "['SZ', 'Swaziland'],",
+                                            "['SE', 'Sweden'],",
+                                            "['CH', 'Switzerland'],",
+                                            "['SY', 'Syria'],",
+                                            "['ST', 'São Tomé and Príncipe'],",
+                                            "['TW', 'Taiwan'],",
+                                            "['TJ', 'Tajikistan'],",
+                                            "['TZ', 'Tanzania'],",
+                                            "['TH', 'Thailand'],",
+                                            "['TL', 'Timor-Leste'],",
+                                            "['TG', 'Togo'],",
+                                            "['TK', 'Tokelau'],",
+                                            "['TO', 'Tonga'],",
+                                            "['TT', 'Trinidad and Tobago'],",
+                                            "['TN', 'Tunisia'],",
+                                            "['TR', 'Turkey'],",
+                                            "['TM', 'Turkmenistan'],",
+                                            "['TC', 'Turks and Caicos Islands'],",
+                                            "['TV', 'Tuvalu'],",
+                                            "['UM', 'U.S. Minor Outlying Islands'],",
+                                            "['PU', 'U.S. Miscellaneous Pacific Islands'],",
+                                            "['VI', 'U.S. Virgin Islands'],",
+                                            "['UG', 'Uganda'],",
+                                            "['UA', 'Ukraine'],",
+                                            "['SU', 'Union of Soviet Socialist Republics'],",
+                                            "['AE', 'United Arab Emirates'],",
+                                            "['GB', 'United Kingdom'],",
+                                            "['US', 'United States'],",
+                                            "['ZZ', 'Unknown or Invalid Region'],",
+                                            "['UY', 'Uruguay'],",
+                                            "['UZ', 'Uzbekistan'],",
+                                            "['VU', 'Vanuatu'],",
+                                            "['VA', 'Vatican City'],",
+                                            "['VE', 'Venezuela'],",
+                                            "['VN', 'Vietnam'],",
+                                            "['WK', 'Wake Island'],",
+                                            "['WF', 'Wallis and Futuna'],",
+                                            "['EH', 'Western Sahara'],",
+                                            "['YE', 'Yemen'],",
+                                            "['ZM', 'Zambia'],",
+                                            "['ZW', 'Zimbabwe'],",
+                                            "['AX', 'Åland Islands'],",
+                                            "]"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "store": "array",
+                                        "scrollable": "boolean",
+                                        "allowBlank": "boolean",
+                                        "editable": "boolean",
+                                        "fieldLabel": "string",
+                                        "itemId": "string",
+                                        "labelAlign": "string",
+                                        "labelWidth": "number",
+                                        "layout|flex": "number",
+                                        "maxHeight": "number"
+                                    },
+                                    "name": "MyComboBox2",
+                                    "designerId": "65d79aee-a12c-4dd8-b652-6b30a5731ab8"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.CheckboxGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "",
+                        "height": null,
+                        "labelAlign": "top",
+                        "layout": "vbox",
+                        "layout|flex": null,
+                        "margin": "2 10",
+                        "width": 630
+                    },
+                    "configAlternates": {
+                        "scrollable": "boolean",
+                        "container|align": "string",
+                        "fieldLabel": "string",
+                        "height": "auto",
+                        "labelAlign": "string",
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "margin": "auto",
+                        "width": "auto"
+                    },
+                    "name": "MyCheckboxGroup",
+                    "designerId": "5d769f4e-ecd0-4bfd-8a16-3ba83f20d03f",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "Yes, I would like to receive email notification for product upgrades and releases.",
+                                "checked": true,
+                                "fieldLabel": null,
+                                "itemId": "prodRegCheckUpgrades"
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "boxLabel": "string",
+                                "checked": "boolean",
+                                "fieldLabel": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyCheckbox",
+                            "designerId": "61f68743-74ee-4e9f-9162-37ff9fba6ab0"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "Yes, I would like to receive email communications related to Buurst Inc. including promotions and newsletters.",
+                                "checked": true,
+                                "fieldLabel": null,
+                                "itemId": "prodRegCheckPromotions"
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "boxLabel": "string",
+                                "checked": "boolean",
+                                "fieldLabel": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyCheckbox1",
+                            "designerId": "a1e1b813-1e69-4a47-b573-dd7636702cf6"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "Do not show me this again.",
+                                "fieldLabel": "",
+                                "itemId": "prodRegCheckNotShowAgain",
+                                "layout|flex": 1
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "boxLabel": "string",
+                                "fieldLabel": "string",
+                                "itemId": "string",
+                                "layout|flex": "number"
+                            },
+                            "name": "MyCheckbox3",
+                            "designerId": "ca7f50fe-b962-413e-b725-ff6ab0c71541"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.FieldContainer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "",
+                        "height": 46,
+                        "layout": "hbox",
+                        "layout|flex": null,
+                        "width": 630
+                    },
+                    "configAlternates": {
+                        "scrollable": "boolean",
+                        "container|align": "string",
+                        "fieldLabel": "string",
+                        "height": "auto",
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "width": "auto"
+                    },
+                    "name": "MyFieldContainer4",
+                    "designerId": "1376cc21-6335-4c1a-8fd7-40aedb4bdaa0",
+                    "cn": [
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|pack": "end",
+                                "fieldLabel": "",
+                                "height": null,
+                                "layout": "hbox",
+                                "layout|flex": 1,
+                                "width": null
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "container|pack": "string",
+                                "fieldLabel": "string",
+                                "height": "auto",
+                                "layout": "string",
+                                "layout|flex": "number",
+                                "width": "auto"
+                            },
+                            "name": "MyFieldContainer5",
+                            "designerId": "65b5e96c-41fa-410d-8cf2-d2d9d7440084",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "itemId": "prodRegBtnSubmit",
+                                        "margin": 5,
+                                        "text": "Submit"
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "itemId": "string",
+                                        "margin": "auto",
+                                        "text": "string"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "be5e121b-0011-4d80-84eb-0a9f1ecf3efc",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegBtnSubmitClick",
+                                                "implHandler": [
+                                                    "var prodRegWnd = this;",
+                                                    "",
+                                                    "var comboJobF = prodRegWnd.query(\"#prodRegJobFunction\")[0];",
+                                                    "var comboIndustry = prodRegWnd.query(\"#prodRegIndustry\")[0];",
+                                                    "var comboCountry = prodRegWnd.query(\"#prodRegCountry\")[0];",
+                                                    "",
+                                                    "var firstNameCmp = prodRegWnd.query(\"#prodRegFirstName\")[0];",
+                                                    "var lastNameCmp = prodRegWnd.query(\"#prodRegLastName\")[0];",
+                                                    "var jobTitleCmp = prodRegWnd.query(\"#prodRegJobTitle\")[0];",
+                                                    "var companyCmp = prodRegWnd.query(\"#prodRegCompany\")[0];",
+                                                    "var address1Cmp = prodRegWnd.query(\"#prodRegAddress1\")[0];",
+                                                    "var address2Cmp = prodRegWnd.query(\"#prodRegAddress2\")[0];",
+                                                    "var cityCmp = prodRegWnd.query(\"#prodRegCity\")[0];",
+                                                    "var businessPhoneCmp = prodRegWnd.query(\"#prodRegBusinessPhone\")[0];",
+                                                    "var businessEmailCmp = prodRegWnd.query(\"#prodRegBusinessEmail\")[0];",
+                                                    "var zipCmp = prodRegWnd.query(\"#prodRegZip\")[0];",
+                                                    "var createAccountCmp = prodRegWnd.query(\"#prodRegCreateAccount\")[0];",
+                                                    "var passwordCmp = prodRegWnd.query(\"#prodRegPassword\")[0];",
+                                                    "var passwordConfirmCmp = prodRegWnd.query(\"#prodRegPasswordConfirm\")[0];",
+                                                    "",
+                                                    "var firstName = Ext.util.Format.trim(firstNameCmp.getValue());",
+                                                    "var lastName = Ext.util.Format.trim(lastNameCmp.getValue());",
+                                                    "var company = Ext.util.Format.trim(companyCmp.getValue());",
+                                                    "var jobTitle = Ext.util.Format.trim(jobTitleCmp.getValue());",
+                                                    "var address1 = Ext.util.Format.trim(address1Cmp.getValue());",
+                                                    "var address2 = Ext.util.Format.trim(address2Cmp.getValue());",
+                                                    "var city = Ext.util.Format.trim(cityCmp.getValue());",
+                                                    "var phone = Ext.util.Format.trim(businessPhoneCmp.getValue());",
+                                                    "var mail = Ext.util.Format.trim(businessEmailCmp.getValue());",
+                                                    "var zip = Ext.util.Format.trim(zipCmp.getValue());",
+                                                    "var createAccount = createAccountCmp.getValue();",
+                                                    "var password = passwordCmp.getValue();",
+                                                    "var passwordConfirm = passwordConfirmCmp.getValue();",
+                                                    "",
+                                                    "firstNameCmp.setValue(firstName);",
+                                                    "lastNameCmp.setValue(lastName);",
+                                                    "businessPhoneCmp.setValue(phone);",
+                                                    "businessEmailCmp.setValue(mail);",
+                                                    "companyCmp.setValue(company);",
+                                                    "jobTitleCmp.setValue(jobTitle);",
+                                                    "address1Cmp.setValue(address1);",
+                                                    "address2Cmp.setValue(address2);",
+                                                    "cityCmp.setValue(city);",
+                                                    "zipCmp.setValue(zip);",
+                                                    "",
+                                                    "var v = comboCountry.getValue();",
+                                                    "var record = comboCountry.findRecord(comboCountry.valueField || comboCountry.displayField, v);",
+                                                    "var comboCountryIndex = comboCountry.store.indexOf(record);",
+                                                    "",
+                                                    "if(!firstNameCmp.disabled){",
+                                                    "    if(!firstName || !lastName || !comboJobF.getValue() || !phone || !mail ||",
+                                                    "       !company || !comboIndustry.getValue() || !address1 || !city || !comboCountry.getValue() || !zip){",
+                                                    "        Ext.Msg.alert('Submit failed', 'Please fill the required fields.');",
+                                                    "        return;",
+                                                    "    }",
+                                                    "    if( !firstNameCmp.isValid() || !lastNameCmp.isValid() || !businessPhoneCmp.isValid() ||",
+                                                    "       !businessEmailCmp.isValid() || !companyCmp.isValid() || !jobTitleCmp.isValid() ||",
+                                                    "       !address1Cmp.isValid() || !address2Cmp.isValid() || !cityCmp.isValid() || !zipCmp.isValid() ||",
+                                                    "       ( createAccount && ( !passwordCmp.isValid() || !passwordConfirmCmp.isValid() ) )",
+                                                    "      ){",
+                                                    "        Ext.Msg.alert('Submit failed', 'Some of fields are not entered correctly.');",
+                                                    "        return;",
+                                                    "    }",
+                                                    "}else{",
+                                                    "    if(!mail){",
+                                                    "        Ext.Msg.alert('Submit failed', 'Please fill the required fields (Business Email).');",
+                                                    "        return;",
+                                                    "    }",
+                                                    "}",
+                                                    "",
+                                                    "",
+                                                    "var email_domains = ['gmail', 'yahoo'];",
+                                                    "",
+                                                    "var mail_parts = mail.split('@');",
+                                                    "var domain_parts = [];",
+                                                    "var i;",
+                                                    "if(mail_parts[1] !== undefined){",
+                                                    "    domain_parts = mail_parts[1].split('.');",
+                                                    "    for(i in email_domains){",
+                                                    "        if(domain_parts[0] == email_domains[i]){",
+                                                    "            Ext.Msg.alert('Submit failed', 'Business Email address must be corporate email account.');",
+                                                    "            return;",
+                                                    "        }",
+                                                    "    }",
+                                                    "}",
+                                                    "",
+                                                    "prodRegWnd.mask('Submitting' , 'Please wait...');",
+                                                    "Ext.Ajax.request({",
+                                                    "    url: iFrame.request_url,",
+                                                    "    scope: this,",
+                                                    "    method : 'POST',",
+                                                    "    params : {",
+                                                    "        opcode: 'product_registration',",
+                                                    "",
+                                                    "        prodRegFirstName: \t\tfirstName,",
+                                                    "        prodRegLastName: \t\tlastName,",
+                                                    "        prodRegJobFunction: \tcomboJobF.getDisplayValue(),",
+                                                    "        prodRegJobTitle: \t\tjobTitle,",
+                                                    "        prodRegBusinessPhone: \tphone,",
+                                                    "        prodRegBusinessEmail: \tmail,",
+                                                    "        prodRegCreateAccount: \tcreateAccount,",
+                                                    "        prodRegPassword: \t\tpassword,",
+                                                    "        prodRegPasswordConfirm: passwordConfirm,",
+                                                    "",
+                                                    "        prodRegAccountId: \t\tprodRegWnd.query(\"#prodRegAccountId\")[0].getValue(),",
+                                                    "        prodRegInstanceId: \t\tprodRegWnd.query(\"#prodRegInstanceId\")[0].getValue(),",
+                                                    "        prodRegCompany: \t\tcompany,",
+                                                    "        prodRegIndustry: \t\tcomboIndustry.getDisplayValue(),",
+                                                    "        prodRegAddress1: \t\taddress1,",
+                                                    "        prodRegAddress2: \t\taddress2,",
+                                                    "        prodRegCity: \t\t\tcity,",
+                                                    "        prodRegZip: \t\t\tzip,",
+                                                    "        prodRegCountry: \t\tcomboCountry.getDisplayValue(),",
+                                                    "        prodRegCountryIndex:\tcomboCountryIndex,",
+                                                    "        prodRegCheckUpgrades: \tprodRegWnd.query(\"#prodRegCheckUpgrades\")[0].getValue(),",
+                                                    "        prodRegCheckPromotions: prodRegWnd.query(\"#prodRegCheckPromotions\")[0].getValue(),",
+                                                    "        prodRegCheckNotShowAgain:prodRegWnd.query(\"#prodRegCheckNotShowAgain\")[0].getValue()",
+                                                    "    },",
+                                                    "    timeout: 100000,",
+                                                    "",
+                                                    "    success: function(response, opts) {",
+                                                    "        prodRegWnd.unmask();",
+                                                    "        //console.log(response, opts.params);",
+                                                    "        data = JSON.parse(response.responseText);",
+                                                    "        if(data.success){",
+                                                    "            var msg_text = 'Submit successful';",
+                                                    "            if(data.records.warning !== undefined){",
+                                                    "                msg_text += (\" \" + data.records.warning);",
+                                                    "            }",
+                                                    "            Ext.Msg.alert('Product Registration', msg_text);",
+                                                    "",
+                                                    "            iFrame.getApplication().getController('MainCtrl').hideProdRegButton();",
+                                                    "",
+                                                    "            prodRegWnd.close();",
+                                                    "        }else{",
+                                                    "            if(data !== undefined && data.msg !== undefined){",
+                                                    "                Ext.Msg.alert('Product Registration', data.msg);",
+                                                    "            }else{",
+                                                    "                Ext.Msg.alert('Product Registration', 'Submit error, please try again later.');",
+                                                    "            }",
+                                                    "        }",
+                                                    "    },",
+                                                    "    failure: function(response, opts) {",
+                                                    "        prodRegWnd.unmask();",
+                                                    "        //console.log(response, opts.params);",
+                                                    "        Ext.Msg.alert('Product Registration', 'Submit failed, please try again later.');",
+                                                    "    }",
+                                                    "});"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegBtnSubmitClick",
+                                            "designerId": "5ce5790b-a573-4027-b3c4-102dc600720b"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "",
+                                "height": null,
+                                "layout": "hbox",
+                                "layout|flex": 1,
+                                "width": null
+                            },
+                            "configAlternates": {
+                                "scrollable": "boolean",
+                                "fieldLabel": "string",
+                                "height": "auto",
+                                "layout": "string",
+                                "layout|flex": "number",
+                                "width": "auto"
+                            },
+                            "name": "MyFieldContainer6",
+                            "designerId": "dc48381e-86c0-43eb-805f-70761180f442",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "itemId": "prodRegBtnExit",
+                                        "layout|flex": null,
+                                        "margin": 5,
+                                        "text": "No thanks, I do not want support"
+                                    },
+                                    "configAlternates": {
+                                        "scrollable": "boolean",
+                                        "itemId": "string",
+                                        "layout|flex": "number",
+                                        "margin": "auto",
+                                        "text": "string"
+                                    },
+                                    "name": "MyButton1",
+                                    "designerId": "43175051-d316-4f7d-b3d4-765d6ce99142",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onProdRegBtnExitClick",
+                                                "implHandler": [
+                                                    "this.close();"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string",
+                                                "scope": "string"
+                                            },
+                                            "name": "onProdRegBtnExitClick",
+                                            "designerId": "e643d624-5af3-48a1-b6af-204d445c1035"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWindowBeforeAdd",
+                "implHandler": [
+                    "var comboCountryStore = Ext.ComponentQuery.query(\"#prodRegCountry\")[0].getStore();",
+                    "//comboCountryStore.loadData([['Afganistan','1'], ['Yugoslavia','2'], ['Italy','3']]);"
+                ],
+                "name": "beforeadd",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onWindowBeforeAdd",
+            "designerId": "1cfcd9da-0c39-435e-9ddc-729a60a1d879"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onProdRegWindowBeforeShow",
+                "implHandler": [
+                    "if(window['prodreg_info'] !== undefined){",
+                    "",
+                    "    iFrame.getApplication().getController('MainCtrl').getProgRegInputs();",
+                    "",
+                    "    var prodreg = window['prodreg_info'];",
+                    "",
+                    "    if(prodreg.registration !== undefined && prodreg.prodreg_not_show_again !== undefined && prodreg.prodreg_not_show_again == true){",
+                    "        return;",
+                    "    }",
+                    "",
+                    "    if(prodreg.platform === undefined ||",
+                    "       (prodreg.platform != 'azure' && prodreg.platform != 'VM' && prodreg.platform != 'amazon')){",
+                    "        Ext.ComponentQuery.query(\"#prodRegPlatformName\")[0].setValue(\"Unknown\");",
+                    "    }",
+                    "    if(prodreg.platform == 'azure'){",
+                    "        Ext.ComponentQuery.query(\"#prodRegPlatformName\")[0].setValue(\"Microsoft Azure\");",
+                    "    }",
+                    "    if(prodreg.platform == 'VM'){",
+                    "        Ext.ComponentQuery.query(\"#prodRegPlatformName\")[0].setValue(\"VMware\");",
+                    "    }",
+                    "    if(prodreg.platform == 'amazon'){",
+                    "        Ext.ComponentQuery.query(\"#prodRegPlatformName\")[0].setValue(\"AWS\");",
+                    "    }",
+                    "",
+                    "    if(prodreg.prodreg_instance_id !== undefined){",
+                    "        Ext.ComponentQuery.query(\"#prodRegInstanceId\")[0].setValue(prodreg.prodreg_instance_id);",
+                    "    }",
+                    "    if(prodreg.prodreg_account !== undefined){",
+                    "        Ext.ComponentQuery.query(\"#prodRegAccountId\")[0].setValue(prodreg.prodreg_account);",
+                    "    }",
+                    "    if(prodreg.platform == 'azure' && prodreg.business_email !== undefined){",
+                    "        Ext.ComponentQuery.query(\"#prodRegAccountId\")[0].setValue(prodreg.business_email);",
+                    "    }",
+                    "",
+                    "    Ext.ComponentQuery.query(\"#prodRegFirstName\")[0].focus();",
+                    "}"
+                ],
+                "name": "beforeshow",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onProdRegWindowBeforeShow",
+            "designerId": "2171e342-7de1-4f8c-b59d-c45def75a2e4"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onProdRegWindowClose",
+                "implHandler": [
+                    "iFrame.getApplication().getController('MainCtrl').saveProgRegInputs(true);",
+                    "//iFrame.getApplication().getController('MainCtrl').showEmailWindow();"
+                ],
+                "name": "close",
+                "scope": "me"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string",
+                "scope": "string"
+            },
+            "name": "onProdRegWindowClose",
+            "designerId": "8db1f0b2-c82e-469f-849d-6d1b301e05fa"
+        }
+    ]
+}

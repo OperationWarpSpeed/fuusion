@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "featurerequestwindow",
+        "designer|userClassName": "FeatureRequestWindowViewController"
+    },
+    "designerId": "fa348b68-60da-4e47-9b0d-04e1006e3188"
+}

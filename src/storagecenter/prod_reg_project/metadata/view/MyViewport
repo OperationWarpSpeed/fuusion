@@ -1,0 +1,121 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "myviewport",
+        "designer|userClassName": "MyViewport"
+    },
+    "name": "MyViewport",
+    "configAlternates": {
+        "scrollable": "boolean"
+    },
+    "designerId": "8452aa15-c19c-464d-b659-0cc30bedabae",
+    "viewControllerInstanceId": "8f73ceb9-374d-4434-892b-5873ae6c77cd",
+    "viewModelInstanceId": "6ca74b5a-c4bf-43ba-aada-ad601c103f43",
+    "cn": [
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "height": 389,
+                "title": "My Form",
+                "width": 498
+            },
+            "name": "MyForm",
+            "configAlternates": {
+                "scrollable": "boolean"
+            },
+            "designerId": "72ee8da3-e937-4f64-af77-829fed85952b",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "margin": 10,
+                        "padding": "5 15",
+                        "text": "Product Registration"
+                    },
+                    "name": "MyButton2",
+                    "configAlternates": {
+                        "scrollable": "boolean"
+                    },
+                    "designerId": "e243bb81-d8f1-437c-bbb3-60634c2136d7",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick",
+                                "implHandler": [
+                                    "//Ext.create('iFrame.view.ProdRegWindow', {renderTo: Ext.getBody()});",
+                                    "iFrame.prodRegW.show();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onButtonClick",
+                            "designerId": "bc939eee-c4a3-4dfe-a41b-3afd63b19279"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "margin": 10,
+                        "padding": "5 15",
+                        "text": "Feature Request"
+                    },
+                    "name": "MyButton3",
+                    "configAlternates": {
+                        "scrollable": "boolean"
+                    },
+                    "designerId": "0c0d3cd7-fcc3-4a23-b87c-fb845b634a0c",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick1",
+                                "implHandler": [
+                                    "//Ext.create('iFrame.view.FeatureRequestWindow', {renderTo: Ext.getBody()});",
+                                    "iFrame.featureW.show();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onButtonClick1",
+                            "designerId": "24cfc14c-8e36-4e7e-a6a4-e14733cd86a7"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

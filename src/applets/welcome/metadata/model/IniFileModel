@@ -1,0 +1,33 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "IniFileModel"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string"
+    },
+    "designerId": "2516bc61-4efa-4561-9981-a07721943dc9",
+    "cn": [
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "ini"
+            },
+            "configAlternates": {
+                "name": "string"
+            },
+            "name": "MyField",
+            "designerId": "dd6c3716-9753-482e-9c94-e991311cdd65"
+        }
+    ]
+}

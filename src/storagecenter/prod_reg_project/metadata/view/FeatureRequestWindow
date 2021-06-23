@@ -1,0 +1,227 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "closeAction": "hide",
+        "designer|userAlias": "featurerequestwindow",
+        "designer|userClassName": "FeatureRequestWindow",
+        "height": 355,
+        "modal": true,
+        "title": "Feature Request",
+        "width": 445
+    },
+    "name": "MyWindow1",
+    "configAlternates": {
+        "scrollable": "boolean"
+    },
+    "designerId": "4813ef13-3352-4407-830f-846aabf0a7d7",
+    "viewControllerInstanceId": "fa348b68-60da-4e47-9b0d-04e1006e3188",
+    "viewModelInstanceId": "274b55ea-0819-437c-831f-87705b2ca405",
+    "cn": [
+        {
+            "type": "Ext.form.FieldContainer",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "dock": null,
+                "fieldLabel": "",
+                "height": "100%",
+                "layout": "vbox",
+                "width": 429
+            },
+            "name": "MyFieldContainer7",
+            "configAlternates": {
+                "scrollable": "boolean"
+            },
+            "designerId": "518009cb-5639-447b-b913-75267224b2fc",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "allowBlank": false,
+                        "blankText": "",
+                        "emptyText": "One sentence summary of your request",
+                        "fieldLabel": "Request",
+                        "itemId": "featureRequestSummary",
+                        "labelAlign": "top",
+                        "labelSeparator": "",
+                        "layout|flex": null,
+                        "margin": "10 10 2 10"
+                    },
+                    "name": "MyTextField11",
+                    "configAlternates": {
+                        "scrollable": "boolean"
+                    },
+                    "designerId": "ac341dad-a79d-404c-9352-2705c76f769b"
+                },
+                {
+                    "type": "Ext.form.field.TextArea",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "emptyText": "Why is it useful, who would benefit from it, how should it work?",
+                        "fieldLabel": "Please add more details",
+                        "height": 178,
+                        "itemId": "featureRequestDetails",
+                        "labelAlign": "top",
+                        "labelSeparator": "",
+                        "layout|flex": null,
+                        "margin": 10
+                    },
+                    "name": "MyTextArea",
+                    "configAlternates": {
+                        "scrollable": "boolean"
+                    },
+                    "designerId": "6ec810de-124a-4bdd-ae88-3aeee0e3b110"
+                },
+                {
+                    "type": "Ext.form.FieldContainer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "",
+                        "height": 42,
+                        "layout|flex": null,
+                        "width": 429
+                    },
+                    "name": "MyFieldContainer8",
+                    "configAlternates": {
+                        "scrollable": "boolean"
+                    },
+                    "designerId": "baf2833c-2e19-40c1-b97f-c8898fac9355",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "featureRequestSubmit",
+                                "margin": "10 10 10 30",
+                                "padding": "5 15",
+                                "text": "Submit"
+                            },
+                            "name": "MyButton4",
+                            "configAlternates": {
+                                "scrollable": "boolean"
+                            },
+                            "designerId": "e1dc747e-d504-4a90-89bb-9963faf0c47d",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onFeatureRequestSubmitClick",
+                                        "implHandler": [
+                                            "var reqWnd = this;",
+                                            "var summary = Ext.util.Format.trim(reqWnd.query(\"#featureRequestSummary\")[0].getValue());",
+                                            "if(!summary){",
+                                            "    Ext.Msg.alert('Submit failed', 'Please fill the required fields.');",
+                                            "    return;",
+                                            "}",
+                                            "Ext.Ajax.request({",
+                                            "    url: iFrame.request_url,",
+                                            "    scope: this,",
+                                            "    method : 'POST',",
+                                            "    params : {",
+                                            "        opcode: 'feature_request',",
+                                            "        featureRequestSummary: summary,",
+                                            "        featureRequestDetails: reqWnd.query(\"#featureRequestDetails\")[0].getValue()",
+                                            "    },",
+                                            "    timeout: 10000,",
+                                            "",
+                                            "    success: function(response, opts) {",
+                                            "        //console.log(response, opts.params);",
+                                            "        data = JSON.parse(response.responseText);",
+                                            "        if(data.success){",
+                                            "            Ext.Msg.alert('Feature Request', 'Submit successful');",
+                                            "            reqWnd.close();",
+                                            "        }else{",
+                                            "            Ext.Msg.alert('Feature Request', 'Submit error, please try again later');",
+                                            "        }",
+                                            "    },",
+                                            "    failure: function(response, opts) {",
+                                            "        //console.log(response, opts.params);",
+                                            "        Ext.Msg.alert('Feature Request', 'Submit error, please try again later');",
+                                            "    }",
+                                            "",
+                                            "});"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onFeatureRequestSubmitClick",
+                                    "designerId": "1324a40d-933a-4922-bfef-08eeac86a531"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "featureRequestExit",
+                                "margin": 10,
+                                "padding": "5 15",
+                                "text": "Cancel"
+                            },
+                            "name": "MyButton5",
+                            "configAlternates": {
+                                "scrollable": "boolean"
+                            },
+                            "designerId": "b139c068-ba7d-4350-937b-ac9ece6d0d62",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onFeatureRequestExitClick",
+                                        "implHandler": [
+                                            "this.close();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onFeatureRequestExitClick",
+                                    "designerId": "24bcdad3-d645-42cb-ad7d-d8cb6ff660e8"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+{
+  "copyright": "Copyright (c) Buurst Inc. All Rights Reserved",
+  "text": ".",
+  "children": [
+    {
+      "text": "Fuusion",
+      "qtip": "Fuusion",
+      "iconCls": "icon-pyramid",
+      "id": "flexfilesNode",
+      "expanded": true,
+      "visible": true,
+      "needEnableFlexfiles": true,
+      "platinum": true,
+      "children": [
+        {
+          "text": "Fuusion Architect",
+          "qtip": "Fuusion Architect",
+          "uri": "../html/nifi.php",
+          "id": "flexfilesArchitectNode",
+          "leaf": true,
+          "needEnableFlexfiles": true,
+          "platinum": true
+        },
+        {
+          "text": "Fuusion Settings",
+          "qtip": "Fuusion Settings",
+          "iconCls": "icon-settings",
+          "uri": "../applets/flexfiles#settings",
+          "id": "flexfilesSettingsNode",
+          "leaf": true,
+          "needEnableFlexfiles": true,
+          "platinum": true
+        }
+      ]
+    },
+    {
+      "text": "UltraFast",
+      "qtip": "UltraFast",
+      "uri": "../applets/ultrafast/",
+      "id": "ultrafast",
+      "leaf": true,
+      "hideModeOffsets": true,
+      "visible": true,
+      "needEnableFlexfiles": true,
+      "platinum": true
+    },
+    {
+      "text": "Settings",
+      "qtip": "Configure Fuusion settings and options",
+      "iconCls": "icon-settings",
+      "expanded": false,
+      "leaf": false,
+      "children": [
+        {
+          "text": "Administrator",
+          "qtip": "General settings for the SoftNAS admin",
+          "iconCls": "administrator",
+          "uri": "../applets/administrator/",
+          "leaf": true
+        },
+        {
+          "text": "Licensing",
+          "qtip": "View and administer Fuusion licensing and enter license keys",
+          "iconCls": "icon-license",
+          "uri": "../applets/license/",
+          "leaf": true
+        },
+        {
+          "text": "Change Password",
+          "qtip": "Change user account passwords",
+          "iconCls": "icon-password",
+          "uri": "../html/changepass.php",
+          "leaf": true
+        },
+        {
+          "text": "Software Updates",
+          "qtip": "View current version and apply available software updates",
+          "iconCls": "icon-update",
+          "uri": "../applets/update/",
+          "leaf": true
+        }
+      ]
+    },
+    {
+      "text": "Documentation",
+      "qtip": "Product documentation and help files",
+      "iconCls": "icon-help",
+      "uri": "https://docs.softnas.com/display/BF",
+      "leaf": false,
+      "expanded": true,
+      "children": [
+        {
+          "text": "Getting Started",
+          "qtip": "Click here for help getting started",
+          "iconCls": "icon-welcome",
+          "uri": "../applets/welcome/",
+          "leaf": true
+        }
+      ]
+    },
+    {
+      "text": "Log out",
+      "qtip": "Log out of StorageCenter",
+      "iconCls": "icon-exit",
+      "uri": "logout.php",
+      "leaf": true,
+      "expanded": true
+    }
+  ]
+}

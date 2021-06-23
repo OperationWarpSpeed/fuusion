@@ -1,0 +1,330 @@
+#!/bin/bash -e
+# -*- coding: UTF-8 -*-
+
+basedir=$(dirname "$([ "$0" = "/*" ] && echo "$0" || echo "${PWD}/${0#./}")")
+skel=$basedir/softnas-skel
+build_errors=
+
+TXT_C="tput setaf"    # set text color in BGR format
+TXT_R="tput sgr0"     # reset text format
+TXT_B="tput bold"     # set bold
+TXT_U="tput sgr 0 1"  # set underlined
+
+usage(){
+  app_name=$(basename $0)
+  echo "Usage: $($TXT_B)$app_name [OPTIONS]$($TXT_R)"
+  echo ""
+  echo "  Options:"
+  echo ""
+  echo "    $($TXT_B)-v VERSION$($TXT_R)"
+  echo "      Softnas version (e.g. 3.3.0)"
+  echo "    $($TXT_B)-e$($TXT_R)"
+  echo "      Use encryption. Leave out if you don't want any encryption, ioncube or obfuscation."
+  echo "    $($TXT_B)-p$($TXT_R)"
+  echo "      Publish to a branch. Possible values: dev, test, prod, custom"
+}
+
+copy_scripts(){
+  src_dir=$1
+  tgt_dir=$2
+  
+  extension_list="sh jar py awk softnas INIT.D"
+  mkdir -p $tgt_dir
+  for extension in $extension_list; do
+    if cp $src_dir/*.$extension $tgt_dir; then
+      echo "WARNING: $src_dir/*.$extension - none found."
+    else
+      echo "*.$extension - copied."
+    fi
+  done
+}
+
+encrypt_scripts(){
+  src_dir=$1
+  tgt_dir=$2
+  
+  mkdir -p $tgt_dir
+  
+  if [ -f "$src_dir/filelist" ]; then
+    file_list=$(cat $src_dir/filelist)
+    #file_list=$( (cd $src_dir; ls *.sh) )
+    for file in $file_list; do
+      if [[ $file != \#* ]]; then
+        echo "- shellcrypt file \"$(basename $file)\""
+        shellcrypt_driver $src_dir/$file $tgt_dir/$file /bin/sh
+        if [ "$?" != "0" ]; then
+          build_errors="$build_errors ERROR: shellcrypt failed on \"$file\"\n"
+          echo "ERROR: shellcrypt failed on \"$file\"\n"
+        fi
+      fi
+    done
+  else
+    build_errors="$build_errors ERROR: shellcrypt cant find \"filelist\" file"
+    echo "ERROR: shellcrypt cant find \"filelist\" file"
+  fi
+}
+
+php_encode(){
+  php_file=$1
+
+  ionencoder="/usr/bin/ioncube_encoder"
+  # Key:  BASE64 of "Hope is NOT a strategy! Results = SMART Goals + Execution and Learning."
+  ionkey="SG9wZSBpcyBOT1QgYSBzdHJhdGVneSEgUmVzdWx0cyA9IFNNQVJUIEdvYWxzICsgRXhlY3V0aW9uIGFuZCBMZWFybmluZy4="
+  copyright="Copyright (c) SoftNAS Inc. All Rights Reserved."
+  
+  echo "- ioncube encoding \"$(basename $php_file)\""
+  $ionencoder \
+    --obfuscation-exclusion-file $softnas/ioncube_exclusion_list \
+    --obfuscate functions \
+    --obfuscation-key "$ionkey" \
+    --add-comment "$copyright" \
+    $php_file -o $php_file.ion -v
+  if [ "$?" != "0" ]; then
+    build_errors="$build_errors ERROR: ionencoder failed on \"$php_file\"\n"
+    echo "ERROR: ionencoder on file '$php_file' failed"
+  fi
+  mv $php_file.ion $php_file
+  rm -f $php_file.src
+}
+
+obfuscate_js(){
+  #TODO
+  if [ -f "$1" ]; then
+    echo -e "\n" >> "$1"
+    echo "- js obfuscation of \"$(basename $1)\""
+    cp $1 $1.src
+
+    if [[ "$(basename $1)" != "ABController.js" ]] && [[ "$(basename $1)" != "VolumeSourceTargetField.js" ]] && [[ "$(basename $1)" != "LiftShiftController.js" ]]; then
+	    uglifyjs -o $1 $1.src
+    fi
+
+    if [ "$?" != "0" ]; then
+      build_errors="$build_errors ERROR: UglifyJS failed on \"$1\"\n"
+    fi
+    rm -f $1.src
+  else
+    build_errors="$build_errors ERROR: UglifyJS failed on \"$1\"\n"
+    echo "missing file \"$1\""
+  fi
+}
+
+build_flexfiles(){
+  encrypt=$1
+  target=$skel/var/www/softnas
+  sencha=~/bin/Sencha/Cmd/sencha
+
+  util_src=packages/local/util/src
+  util_classic=packages/local/util/classic
+
+  pushd $basedir/src/applets/softnas/flexfiles
+   if [ "$encrypt" = "1" ]; then
+    output_path="production"
+    $sencha app build
+   else
+    output_path="testing"
+    $sencha app build testing
+   fi
+  popd
+
+  echo "-- copying $basedir/src/applets/softnas/flexfiles/build/$output_path/FlexFilesApp to $target/applets/flexfiles"
+  mkdir $target/applets/flexfiles
+  cp -R $basedir/src/applets/softnas/build/$output_path/FlexFilesApp/* $target/applets/flexfiles
+
+  echo "-- keeping this folders/classes util to share global functions and plugins for all applets"
+  mkdir -p $target/applets/flexfiles/$util_src
+  mkdir -p $target/applets/flexfiles/$util_classic
+
+  cp -R $basedir/src/applets/softnas/$util_src/* $target/applets/flexfiles/$util_src
+  cp -R $basedir/src/applets/softnas/$util_classic/* $target/applets/flexfiles/$util_classic
+}
+
+build_softnas(){
+  # TODO: scripts and HA should not be in src dir at all
+  # they are NOT compiled, just encrypted
+  softnas=$1
+  version=$2
+  encrypt=$3
+  
+  target=$skel/var/www/softnas
+  source_items="applets db-migrations css images keys php-utils snserver js config html LICENSE php-json storagecenter integrations .htaccess"
+  php_source_dirs="snserver integrations" #for ioncube
+
+  echo "------ clean"
+  rm -rf $skel
+  rm -rf $basedir/RPMS
+  rm -rf $basedir/rpmbuild
+  rm -f  $basedir/softnas-files.txt
+  rm -f  $basedir/softnas.spec
+  rm -f  $basedir/softnas-$version.tar.gz
+  rm -rf $basedir/softnas-$version
+  rm -rf $basedir/faked-root.*
+
+  echo "------ skelbuild"
+  cp -R $basedir/softnas-skel-src $skel
+  for item in $(find $skel -name ".svn"); do rm -rf $item; done
+
+  echo "------ softnasui"
+  rm -rf $target
+  mkdir $target
+  for dir in $source_items; do
+    echo "-- copying $dir"
+    cp -R $softnas/$dir $target/
+  done
+  copy_scripts "$softnas/scripts" "$target/scripts"
+  cp -R "$softnas/templates" "$target/templates"
+  
+  echo "-- set version to $version"
+  echo "$version" > $target/version
+  
+  echo "---- remove SVN and Sencha Architect files and directories"
+  find $target -name ".svn"     | xargs rm -rf
+  find $target -name "*.xds"    | xargs rm -rf
+  find $target -name "metadata" | xargs rm -rf
+
+  echo "---- remove test, backup and log files"
+  find $target -name "test.*"       | xargs rm -rf
+  find $target -name "*.sh~"        | xargs rm -rf
+  find $target -name "*.gz"         | xargs rm -rf
+  find $target -name "*.tgz"        | xargs rm -rf
+  find $target -name "*.tar.gz"     | xargs rm -rf
+  find $target -name "*.tar"        | xargs rm -rf
+  find $target -name "*.ini~"       | xargs rm -rf
+  find $target -name "*.php~"       | xargs rm -rf
+  find $target -name "*.js~"        | xargs rm -rf
+  find $target -name "*.prototype~" | xargs rm -rf
+  find $target -name "*.log"        | xargs rm -rf
+  find $target -name "*.BAK"        | xargs rm -rf
+  find $target -name "*.SAV"        | xargs rm -rf
+
+  if [ "$encrypt" = "1" ]; then
+    echo "---- encode php sources"
+    for dir in $php_source_dirs; do
+      for php_file in $(find $target/$dir -name "*.php"); do
+        php_encode $php_file
+      done
+    done
+    
+    echo "---- uglify javascript sources"
+    for js_file in $(find $target -name "*.js" ! -path "*/applets/softnas/*"); do
+      obfuscate_js "$js_file"
+    done
+  fi
+  
+  build_flexfiles $encrypt
+
+  # remove sencha namespace after build apps
+  rm -rf $target/applets/softnas
+
+  mkdir -p $target/logs/
+  mkdir -p $target/data/
+  rm -rf $target/snserver/softnas.ini
+  rm -rf $target/config/*.ini
+  rm -rf $basedir/fuusionsrc
+
+  echo "---- rpmbuild"
+  echo Building softnas $version package...
+  cp -rpf DEBIAN $skel/DEBIAN
+  rm -rf $basedir/DEBS
+  mkdir $basedir/DEBS
+  sed -i "s/Version:/Version: $version \nDescription: Buurst Fuusion UI - $version/g" $skel/DEBIAN/control
+  cp -rpf $basedir/build_tools/fuusion $basedir/fuusionsrc
+  sed -i "s/Version:/Version: $version \nDescription: Buurst Fuusion - $version/g" fuusionsrc/DEBIAN/control
+  cat <<EOF >> fuusionsrc/DEBIAN/control
+Pre-Depends: fuusion-dependency, fuusion-ui (=$version), fuusion-nifi, fuusion-ultrafast (>=0.9.6-8), fuusion-jdk, iputils-ping, apt-utils, dmidecode, sysstat
+Version: $version
+Description: Buurst Fuusion - $version
+EOF
+
+  chmod 755 $skel/DEBIAN/postinst
+(cd $basedir; dpkg-deb --build softnas-skel && mv softnas-skel.deb DEBS/fuusion-ui-$version.deb )
+(cd $basedir; dpkg-deb --build fuusionsrc && mv fuusionsrc.deb DEBS/fuusion-$version.deb )
+(cd $basedir; bash build_tools/build-fuusion-dependency.sh && mv fuusion-dependency.deb DEBS/ )
+  echo softnas build completed at $(date).
+}
+
+publish(){
+  branch=$1
+  version=$2
+  build_number=$3
+  if [ "$branch" = "" ]; then echo "bad branch"; exit 1; fi
+
+  if [ -f $basedir/DEBS/fuusion-$version.deb ]; then
+    echo "---- publishing version $version to $branch branch"
+    #if [ "$branch" = "prod" ]; then branch=""; fi
+    sed 's/{{build_number}}/'$build_number'/' \
+      $basedir/update-scripts/update-template.sh \
+      > $basedir/softnas_update_$version.sh
+    chmod +x $basedir/softnas_update_$version.sh
+    wget -O $basedir/version_list https://mirror.softnas.com/fuusion/aptrepo_"$branch"/version_list
+    echo "$version" >> $basedir/version_list
+    echo "$version" > $basedir/version
+    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+	$basedir/DEBS/fuusion-$version.deb \
+	$basedir/DEBS/fuusion-ui-$version.deb \
+	$basedir/DEBS/fuusion-dependency.deb \
+	fuusion@mirror.softnas.com:~/public_html/fuusion/aptrepo_"$branch"/amd64/
+    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+      $basedir/softnas_update_$version.sh \
+      $basedir/version_list \
+      $basedir/version \
+      fuusion@mirror.softnas.com:~/public_html/fuusion/aptrepo_"$branch"/
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no fuusion@mirror.softnas.com "/home/fuusion/public_html/fuusion/updaterepo.sh $branch"
+      if [ "$?" != "0" ]; then
+        echo "ERROR: publish failed"
+        exit 1
+      fi
+  else
+    echo "ERROR: publish failed, missing files"
+    exit 1
+  fi
+}
+
+clear_built_files(){
+  # delete built files to save space
+  built_files_dir=$skel
+  echo "---- deleting '$built_files_dir'"
+  rm -rf $built_files_dir
+  rm -rf $basedir/fuusion-dependency
+}
+
+### script starts here ###########
+
+softnas=
+version=
+branch=
+build_number=
+encrypt=
+while getopts ":hv:p:e" option; do
+  case $option in
+    h) usage; exit 0;;
+    e) encrypt=1;;
+    v) version=$OPTARG;;
+    p) branch=$OPTARG;;
+    b) build_number=$OPTARG;;
+    ?) usage; exit 1;;  
+  esac
+done
+softnas=$basedir/src
+#softnas=${@:$OPTIND:1}
+#ARG1=${@:$OPTIND:1}
+#ARG2=${@:$OPTIND+1:1}
+#ARG3=${@:$OPTIND+2:1}
+
+[ "$softnas" != "" ] || (usage; exit 1)
+[ "$version" != "" ] || (echo "version not specified!"; exit 1)
+
+if [[ ! $version =~ ^[0-9.]+$ ]] ; then
+	echo "Only numbers and dots allowed in version number. \n Eg: 5.0.0.1812"
+	exit 1
+  fi	
+
+build_softnas $softnas $version $encrypt
+
+if [ "$build_errors" != "" ]; then
+  echo -e $build_errors
+  exit 1
+elif [ "$branch" != "" ]; then
+  publish $branch $version $build_number
+fi
+clear_built_files
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+own_user=$(stat -c "%u" .)
+own_group=$(stat -c "%u" .)
+
+docker build -t softnas/kernel-build docker/
+docker run --rm=true -v $(pwd):$(pwd) -w $(pwd) softnas/kernel-build ./build $@
+docker run --rm=true -v $(pwd):$(pwd) -w $(pwd) softnas/kernel-build chown -R $own_user:$own_group .
+

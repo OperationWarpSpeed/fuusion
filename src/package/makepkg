@@ -1,0 +1,142 @@
+#!/bin/bash
+
+SKIP_ENCODE=""
+if [ "$1" = "--no-encode" ]; then
+  SKIP_ENCODE="true"
+fi
+
+if [ "$(id -u)" == "0" ]; then
+   echo "This script should NOT be run as root" 1>&2
+   exit 1
+fi
+
+PRODNAME="softnas"
+SOFTNASPKG="/softnaspkg"
+SKELROOT="$SOFTNASPKG/softnas-skel"
+PKGNAME="$PRODNAME"
+CONFIG="config"
+LOGS="logs"
+WWWROOT="/var/www"
+PRODROOT="$WWWROOT/$PKGNAME"
+PKGDIR="$PRODROOT/package"
+MAKEPKG="makepkg"
+TMPDIR="/tmp"
+TMPPKG=$TMPDIR/$PKGNAME
+
+TARGET="$SKELROOT/var/www/$PRODNAME"
+OBFUSCATE="$TARGET/package/obfuscate.sh"
+PHPENCODE="$TARGET/package/phpencode.sh"
+
+VERSION=`cat $PRODROOT/version`
+TARGZ="$PRODNAME.UI.$VERSION.tar.gz"
+
+CURDIR=`pwd`
+if [ "$CURDIR" == "$PKGDIR" ]; then
+    if [ -f $TMPPKG ]; then 
+      rm -f $TMPPKG
+    fi
+    cp ./* $TMPDIR
+    cd $TMPDIR
+    ./makepkg $@
+    exit 0
+fi
+
+echo
+echo "Package SoftNAS(tm) version $VERSION for target directory $TARGET..."
+
+# echo "Compile script sources..."
+( cd $PRODROOT/src/scripts; ./MakeScratch; ./MakeInstall $1; ./MakeClean )
+# echo "Compile HA sources..."
+( cd $PRODROOT/src/HA; ./MakeScratch; ./MakeInstall $1; ./MakeClean )
+
+rm -rf $TARGET
+echo "Copy $PKGNAME source to $TARGET..."
+#cp -R $PRODROOT $TARGET
+mkdir $TARGET
+for dir in applets css files images keys php-utils snserver config data logs html LICENSE php-json scripts storagecenter package api integrations
+do
+  echo "---- copying $dir    to    $TARGET"
+  cp -R $PRODROOT/$dir $TARGET
+done
+for file in version .htaccess
+do
+cp $PRODROOT/$file $TARGET
+done
+
+cd $TARGET
+
+echo "Remove SVN and Sencha Architect files and directories from $TARGET..."
+find . -name ".svn" -print | xargs rm -r
+find . -name "*.xds" -print | xargs rm 
+find . -name "metadata" | xargs rm -rf 
+
+echo "Clean up test, backup and log files from the $TARGET tree..."
+find . -name "test.*"  -exec rm -f {} \;
+find . -name "*.sh~"  -exec rm -f {} \;
+find . -name "*.gz" -exec rm -f {} \;
+find . -name "*.tgz" -exec rm -f {} \;
+find . -name "*.tar.gz" -exec rm -f {} \;
+find . -name "*.tar" -exec rm -f {} \;
+find . -name "*.ini~" -exec rm -f {} \;
+find . -name "*.php~" -exec rm -f {} \;
+find . -name "*.js~"  -exec rm -f {} \;
+find . -name "*.prototype~"  -exec rm -f {} \;
+find . -name "*.log"  -exec rm -f {} \;
+find . -name "*.BAK"  -exec rm -f {} \;
+find . -name "*.SAV"  -exec rm -f {} \;
+
+if [ "$SKIP_ENCODE" = "" ]; then
+  echo "Encode PHP sources..."
+  ( cd snserver; find . -name "*.php"  -exec $PHPENCODE {} \; )
+  ( cd integrations/kayako; find . -name "*.php"  -exec $PHPENCODE {} \; )
+fi
+find . -name "exclusion_list"  -exec rm -f {} \;
+
+if [ "$SKIP_ENCODE" = "" ]; then
+  echo "Uglify JavaScript sources..."
+  find . -name "*.js"  -exec $OBFUSCATE {} \;
+  echo
+fi
+
+# don't .ini files from dev environment
+rm $CONFIG/*.ini
+
+cp $CONFIG/softnas.ini.prototype $CONFIG/softnas.ini
+rm $CONFIG/softnas.ini.prototype
+
+cp $CONFIG/snapreplicate.ini.prototype $CONFIG/snapreplicate.ini
+rm $CONFIG/snapreplicate.ini.prototype
+
+cp $CONFIG/schedules.ini.prototype $CONFIG/schedules.ini
+rm $CONFIG/schedules.ini.prototype
+
+cp $CONFIG/login.ini.prototype $CONFIG/login.ini
+rm $CONFIG/login.ini.prototype
+
+cp $CONFIG/monitoring.ini.prototype $CONFIG/monitoring.ini
+rm $CONFIG/monitoring.ini.prototype
+
+# don't ship dev s3 config file
+rm -f $CONFIG/s3config.ini
+# use s3 prototype config instead
+cp $CONFIG/s3config.ini.prototype $CONFIG/s3config.ini
+rm $CONFIG/s3config.ini.prototype
+
+# don't ship SnapReplicate keys
+rm -f $TARGET/keys/snaprep*.pem
+
+# don't ship SnapReplicate status files
+rm -f $TARGET/config/snaprepstatus.ini $TARGET/config/snapvol*.ini
+
+# don't ship SnapReplicate metadata files
+rm -f $TARGET/data/snaprep-takeover.tgz
+
+# don't ship packaging tools
+rm -rf $TARGET/package
+
+# don't ship log files
+rm -rf $TARGET/logs/*
+
+echo "SoftNAS UI package updated in skeleton directory."
+# clean up and exit
+

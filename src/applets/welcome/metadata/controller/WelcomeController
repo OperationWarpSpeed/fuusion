@@ -1,0 +1,537 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "WelcomeController"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string"
+    },
+    "designerId": "d971da49-46cf-4fe8-a0f6-0032d757c709",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLaunch",
+                "implHandler": [
+                    "if (window.top.reboot_message === true) { // #3528 (avoid alerts if rebooting)",
+                    "    return;",
+                    "}",
+                    "this.handleGettingStarted();",
+                    "var ctrl = window.WelcomeApp.getController(\"WelcomeController\");",
+                    "",
+                    "var url = \"/softnas/snserver/snserv.php\";",
+                    "",
+                    "Ext.getBody().mask(\"Connecting to Server. Please wait ...\");",
+                    "",
+                    "Ext.Ajax.request({",
+                    "    url: url,",
+                    "    scope: this,",
+                    "    method : 'POST',",
+                    "    params : {",
+                    "        opcode: 'serverTest'",
+                    "    },",
+                    "    timeout: 60000,",
+                    "",
+                    "    success: function(response, opts) {",
+                    "        Ext.getBody().unmask();",
+                    "        var reply = Ext.decode(response.responseText);",
+                    "        if( !reply.success )",
+                    "        {",
+                    "            strMsg = \"The server error encountered an error. Unable to continue without a functioning server!\";",
+                    "            Ext.MessageBox.show({",
+                    "                title: 'Server Error',",
+                    "                msg: strMsg,",
+                    "                buttons: Ext.Msg.OK,",
+                    "                closable:false,",
+                    "                fn: this.serverInvalidRedirect,",
+                    "                icon: Ext.MessageBox.ERROR",
+                    "            });",
+                    "            return false;",
+                    "        }",
+                    "        else",
+                    "        {",
+                    "            var ctrl = window.WelcomeApp.getController(\"WelcomeController\");",
+                    "            ctrl.loadLicense();",
+                    "            return true;",
+                    "        }",
+                    "    },",
+                    "    failure: function(response, opts) {",
+                    "        Ext.getBody().unmask();",
+                    "        strMsg = \"The server error encountered an error. Unable to continue without a functioning server!\";",
+                    "        Ext.MessageBox.show({",
+                    "            title: 'Server Error',",
+                    "            msg: strMsg,",
+                    "            buttons: Ext.Msg.OK,",
+                    "            closable:false,",
+                    "            fn: this.serverInvalidRedirect,",
+                    "            icon: Ext.MessageBox.ERROR",
+                    "        });",
+                    "",
+                    "        return false;",
+                    "    }",
+                    "});",
+                    "",
+                    "",
+                    "return false;",
+                    "",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "onLaunch",
+            "designerId": "7ac657c7-dc78-4dbc-98a8-a377a78d7ef3"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "loadLicense",
+                "implHandler": [
+                    "var licenseStore = Ext.getStore(\"LicenseStore\");",
+                    "",
+                    "licenseStore.load({",
+                    "    callback: this.onLicenseLoad,",
+                    "    scope: this",
+                    "});",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "loadLicense",
+            "designerId": "6a70aeac-4b0a-4a63-bb08-3471b35aad72"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "records, operation, success"
+                ],
+                "fn": "onLicenseLoad",
+                "implHandler": [
+                    "if (window.top.reboot_message === true) { // #3528 (avoid alerts if rebooting)",
+                    "    return;",
+                    "}",
+                    "var strMsg;",
+                    "",
+                    "//",
+                    "// First thing we do is check for a valid license before enabling any GUI functionality",
+                    "//",
+                    "if ( records == null )",
+                    "{",
+                    "    if( ! success ) {   // license subsystem malfunction",
+                    "        strMsg = \"Server Error - unable to continue without functioning server system\";",
+                    "        Ext.MessageBox.show({",
+                    "            title: 'Server Error',",
+                    "            msg: strMsg,",
+                    "            buttons: Ext.Msg.OK,",
+                    "            closable:false,",
+                    "            fn: this.invalidLicenseRedirect,",
+                    "            icon: Ext.MessageBox.ERROR",
+                    "        });",
+                    "        return;  // do not proceed with UI start-up",
+                    "    }",
+                    "    else",
+                    "    {",
+                    "        alert(\"Unable to contact server - try again later or correct the networking issue.  Exiting.\");",
+                    "    }",
+                    "    return;",
+                    "}",
+                    "",
+                    "var data = records[0].data;",
+                    "var licValid = data.valid;",
+                    "var licStatus = data.status;",
+                    "var serverToday = data.today;",
+                    "var licExpiration = data.expiration;",
+                    "var gracedays = data.gracedays;",
+                    "var graceremaining = data.graceremaining;",
+                    "var graceperiod = data.graceperiod;",
+                    "var licType = data.licensetype;",
+                    "var prodType = data.producttype;",
+                    "var platform = data.platform;",
+                    "var isTrial = data.istrial;",
+                    "var isPerpetual = data.is_perpetual;",
+                    "var isActivated = data.is_activated;",
+                    "",
+                    "// Verify license is OK.  If not, issue error \"status\" message to user and redirect top window to license key page.",
+                    "if ( ! licValid || licStatus != \"Valid License\" )",
+                    "{",
+                    "",
+                    "    strMsg = \"License Error - unable to continue.<br /><br />Details: \" + licStatus;",
+                    "    Ext.MessageBox.show({",
+                    "        title: 'License Validation Error',",
+                    "        msg: strMsg,",
+                    "        buttons: Ext.Msg.OK,",
+                    "        closable:false,",
+                    "        fn: this.invalidLicenseRedirect,",
+                    "        icon: Ext.MessageBox.ERROR",
+                    "    });",
+                    "    return;  // do not proceed with UI start-up",
+                    "}",
+                    "",
+                    "// Valid license. Check for expiration.",
+                    "",
+                    "var now = new Date();                                      // local date/time now on client computer",
+                    "",
+                    "var mon, day, year;",
+                    "",
+                    "var dateParts = serverToday.split(\"/\");",
+                    "year = dateParts[2];",
+                    "day = dateParts[1];",
+                    "mon = dateParts[0] -1;",
+                    "",
+                    "var serverDateToday = new Date(year, mon, day, 0, 0, 1);  // Noon today, server's date/time",
+                    "",
+                    "var diffDays = Math.abs( this.daysBetween( serverDateToday, now ) ); // absolute number of days difference (should be 0 to 1 max)",
+                    "",
+                    "// Allow up to 2 days difference between client and server date/time for different timezones (client and server must be within 2 days of each other)",
+                    "if( diffDays > 2 )  // there's a serious time discrepancy between client and server - could be date/time tampering vs. expiration, no-go",
+                    "{",
+                    "    strMsg = \"Invalid date/time on server. Please correct date/time on server to continue.\";",
+                    "    Ext.MessageBox.show({",
+                    "        title: 'Expired License',",
+                    "        msg: strMsg,",
+                    "        buttons: Ext.Msg.OK,",
+                    "        closable:false,",
+                    "        //    fn: this.invalidLicenseRedirect,",
+                    "        icon: Ext.MessageBox.ERROR",
+                    "    });",
+                    "    return;  // do not proceed with UI start-up",
+                    "}",
+                    "",
+                    "// Date/time of server and client match up reasonably",
+                    "",
+                    "",
+                    "dateParts = licExpiration.split(\"/\");",
+                    "year = dateParts[2];",
+                    "day = dateParts[1];",
+                    "mon = dateParts[0] -1;",
+                    "",
+                    "",
+                    "var dateExpired = new Date(year, mon, day, 0, 0, 1);  // 1 second after midnight on expiration date",
+                    "",
+                    "if( now >= dateExpired && ! isPerpetual )  // a subscription-based license has expired",
+                    "{",
+                    "    strMsg = \"License and grace period have both expired. Please renew your license and enter a valid license key to continue.\";",
+                    "    Ext.MessageBox.show({",
+                    "        title: 'Expired License',",
+                    "        msg: strMsg,",
+                    "        buttons: Ext.Msg.OK,",
+                    "        closable:false,",
+                    "        fn: this.invalidLicenseRedirect,",
+                    "        icon: Ext.MessageBox.ERROR",
+                    "    });",
+                    "    return;  // do not proceed with UI start-up",
+                    "}",
+                    "",
+                    "",
+                    "if( graceperiod == \"1\" && ! isPerpetual )  // grace period is in effect",
+                    "{",
+                    "    strMsg = \"WARNING: Your license has expired. You only have \" + graceremaining + \" grace days remaining.<br><br>Renew your license now!\";",
+                    "    Ext.MessageBox.show({",
+                    "        title: 'Expired License - Grace Period In Effect',",
+                    "        msg: strMsg,",
+                    "        buttons: Ext.Msg.OK,",
+                    "        closable:false,",
+                    "        fn: this.continueStartup,",
+                    "        icon: Ext.MessageBox.WARNING",
+                    "    });",
+                    "}",
+                    "",
+                    "//",
+                    "// Detect license activation status and attach appropriate status tag to news page request",
+                    "//",
+                    "// <iframe src=\"https://www.softnas.com/about/news/#news\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"auto\"></iframe>'",
+                    "//",
+                    "var newsFrame = document.getElementById(\"frame_aboutnews\");",
+                    "var indargs = \"?prod=\" + prodType + \"&platform=\" + platform;",
+                    "if( isActivated && newsFrame )",
+                    "{",
+                    "    // Set news panel activation indicator to \"#act\"",
+                    "    var src = \"https://www.softnas.com/about/news/#act\" + indargs;",
+                    "    newsFrame.src = src;",
+                    "}",
+                    "else if( !isActivated && newsFrame )",
+                    "{",
+                    "    // Set news panel indicator to \"#news\" to installed",
+                    "    var src = \"https://www.softnas.com/about/news/#news\" + indargs;",
+                    "    newsFrame.src = src;",
+                    "}",
+                    "",
+                    "",
+                    "this.continueStartup(); // continue normal startup sequence with valid license",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "onLicenseLoad",
+            "designerId": "067c1634-9947-44b9-bf79-0703d4363a54"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "serverInvalidRedirect",
+                "implHandler": [
+                    "window.top.location.href = \"/softnas/html/servererror.php\"; // redirect to server error page"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "serverInvalidRedirect",
+            "designerId": "d506bd37-4d62-42ab-9347-48697f9a564e"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "invalidLicenseRedirect",
+                "implHandler": [
+                    "window.top.location.href = \"/softnas/html/licenselimit.php\"; // redirect to license error page ",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "invalidLicenseRedirect",
+            "designerId": "8d956257-1560-448a-ad98-1703cf23576b"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "records, operation, success"
+                ],
+                "fn": "onIniLoad",
+                "implHandler": [
+                    "if (window.top.reboot_message === true) { // #3528 (avoid alerts if rebooting)",
+                    "    return;",
+                    "}",
+                    "// see if the license agreement has been acknowledged yet.  If not, display it in modal window and do not allow user",
+                    "// to proceed to use any other StorageCenter features until the license has been agreed upon.",
+                    "if ( records == null )",
+                    "{",
+                    "    alert(\"Unable to contact server - try again later or correct the networking issue.\");",
+                    "    return;",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "onIniLoad",
+            "designerId": "5beffeb2-8528-49ee-acc4-6ff75272641c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "date1, date2"
+                ],
+                "fn": "daysBetween",
+                "implHandler": [
+                    "// Returns days between two dates",
+                    "",
+                    "//Get 1 day in milliseconds",
+                    "var one_day=1000*60*60*24;",
+                    "",
+                    "// Convert both dates to milliseconds",
+                    "var date1_ms = date1.getTime();",
+                    "var date2_ms = date2.getTime();",
+                    "",
+                    "// Calculate the difference in milliseconds",
+                    "var difference_ms = date2_ms - date1_ms;",
+                    "",
+                    "// Convert back to days and return",
+                    "return Math.round(difference_ms/one_day); ",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "daysBetween",
+            "designerId": "750bbee4-7fcb-406d-8da5-a29de2f37beb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "continueStartup",
+                "implHandler": [
+                    "//",
+                    "// We have a valid license - continue startup sequence",
+                    "//",
+                    "",
+                    "//",
+                    "// Continue by loading IniFileStore and initialize StorageCenter UI for use",
+                    "//",
+                    "",
+                    "var iniStore = Ext.getStore(\"IniFileStore\");",
+                    "",
+                    "iniStore.load({",
+                    "    callback: this.onIniLoad,",
+                    "    scope: this",
+                    "});",
+                    "",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "continueStartup",
+            "designerId": "6ed18152-c12f-4d65-94f9-233aa55bcb42"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "handleGettingStarted",
+                "implHandler": [
+                    "if (window.top.agreement !== undefined && window.top.agreement === true &&",
+                    "    window.top.show_getting_started !== undefined && window.top.show_getting_started === \"1\") {",
+                    "",
+                    "    var maincontroller = top.window.maincontroller;",
+                    "    this.isLicenseValid(function (isValid) {",
+                    "        if (isValid) {",
+                    "            maincontroller.launchNodeByTitle( \"Getting Started\" );",
+                    "        }",
+                    "    });",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "handleGettingStarted",
+            "designerId": "638b6943-47c5-48f5-90bd-abf5cbde861e"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "NewsFrame",
+                "selector": "#frame_aboutnews"
+            },
+            "configAlternates": {
+                "ref": "string",
+                "selector": "string"
+            },
+            "name": "NewsFrame",
+            "designerId": "ce29d0a8-e967-4606-8437-b3097345648c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "callback"
+                ],
+                "fn": "isLicenseValid",
+                "implHandler": [
+                    "var url = \"/softnas/snserver/snserv.php\";",
+                    "Ext.Ajax.request({",
+                    "    url: url,",
+                    "    scope: this,",
+                    "    method: 'POST',",
+                    "    params: {",
+                    "        opcode: 'licenseinfo',",
+                    "        fulldetails: '1'",
+                    "    },",
+                    "    timeout: 30000,",
+                    "",
+                    "    success: function (response, opts) {",
+                    "        if (response) {",
+                    "            var reply = Ext.decode(response.responseText);",
+                    "            callback(reply.records.valid);",
+                    "        }",
+                    "    },",
+                    "    failure: function(response, opts) {",
+                    "        Ext.Msg.alert('Operation Failed', \"Error contacting server. Please resolve any network issues and try again.\");",
+                    "    }",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "isLicenseValid",
+            "designerId": "06d0f2fc-7862-48de-a34d-22abe3485d25"
+        }
+    ]
+}

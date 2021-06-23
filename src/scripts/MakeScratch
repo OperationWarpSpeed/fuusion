@@ -1,0 +1,6 @@
+#/bin/bash
+# MakeScratch - make scripts from scratch
+#
+./MakeClean
+./MakeScripts
+

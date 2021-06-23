@@ -1,0 +1,53 @@
+table { 
+        margin: 0;
+        padding: 0;
+        border: double 2px #CFCFCF;
+}
+
+th {
+        padding: 5px;
+        background: #F3F3F3;
+        color: #555;
+        font-weight: bold;
+}
+
+td {
+        padding: 5px;
+}
+
+#spinner_gif {
+	display:none;
+	float:right;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+}
+
+#alertbox {
+	position: relative;
+	text-align: center;
+	border: 1px solid black;
+	border-color: black;
+	min-width: 300px;
+	width: 25%;
+	margin: 0 auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 50px;
+}
+
+.top-middle {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.error {
+	background-color: rgba(228, 76, 76, 0.61);
+}
+
+.success {
+	background-color: rgba(23, 177, 36, 0.6);
+}

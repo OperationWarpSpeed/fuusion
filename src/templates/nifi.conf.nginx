@@ -1,0 +1,32 @@
+proxy_set_header Host $host;
+proxy_set_header X-Forwarded-Port 443;
+proxy_set_header X-Forwarded-Proto https;
+
+#proxy_ssl_verify off;
+#proxy_ssl_certificate /var/www/softnas/keys/nifi/localhost/buurst.pem;
+#proxy_ssl_certificate_key /var/www/softnas/keys/nifi/localhost/buurst.key.pem;
+#proxy_ssl_trusted_certificate /var/www/softnas/keys/nifi/localhost/server.pem;
+
+location /nifi-api {
+	proxy_pass https://127.0.0.1:FlexFiles_Port;
+	proxy_redirect https://127.0.0.1:FlexFiles_Port /nifi-api;
+	proxy_buffering off;
+}
+
+location /nifi {
+	proxy_pass https://127.0.0.1:FlexFiles_Port;
+	proxy_redirect https://127.0.0.1:FlexFiles_Port /nifi;
+	proxy_buffering off;
+}
+
+location /nifi-registry-api {
+	proxy_pass https://127.0.0.1:18443;
+	proxy_redirect https://127.0.0.1:18443 /nifi-registry-api;
+	proxy_buffering off;
+}
+
+location /nifi-registry {
+	proxy_pass https://127.0.0.1:18443;
+	proxy_redirect https://127.0.0.1:18443 /nifi-registry;
+	proxy_buffering off;
+}

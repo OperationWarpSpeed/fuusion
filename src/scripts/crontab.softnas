@@ -1,0 +1,4 @@
+0 0,12 * * * cd /var/www/buurst/snserver/ && /usr/bin/php /var/www/buurst/snserver/sched-usage-report.php > /dev/null 2>&1
+0 * * * * cd /var/www/buurst/snserver/ && /usr/bin/php /var/www/buurst/snserver/sched-renew.php > /dev/null 2>&1
+0 0 * * * find /tmp -type f -name sess_* -cmin +720 | xargs rm -f > /dev/null 2>&1
+* * * * * /usr/bin/php /var/www/buurst/snserver/cron_check_session.php > /dev/null 2>&1

@@ -1,0 +1,29 @@
+#!/bin/bash
+# MakeInstall - Installs compiled scripts into product script directory
+#
+TARGET="../../scripts"
+SKIP_ENCODE=""
+if [ "$1" = "--no-encode" ]; then
+  SKIP_ENCODE="true"
+fi
+
+# default to using all scripts
+cp *.sh       $TARGET
+cp *.py       $TARGET
+cp *.awk      $TARGET
+cp *.softnas  $TARGET
+rm -f $TARGET/devupdate.sh
+
+if [ "$SKIP_ENCODE" = "" ]; then
+  # replace protected scripts with executable version
+  #FILELIST=""
+  FILELIST=`cat filelist`
+  for file in $FILELIST
+  do
+    BASE=`basename $file .sh`
+    cp -f $BASE $TARGET/$file
+  done
+fi
+
+echo "Scripts installed"
+

@@ -1,0 +1,157 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "name": "administrator"
+    },
+    "configAlternates": {
+        "controllers": "typedarray",
+        "models": "typedarray",
+        "name": "string",
+        "requires": "typedarray",
+        "stores": "typedarray",
+        "views": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "title",
+                    "str"
+                ],
+                "fn": "popMsg",
+                "implHandler": [
+                    "var ctrl = window.appAdmin;",
+                    "var insertPoint = document.body;",
+                    "",
+                    "// #3954, #3957, #3958 - Find previous message and destroy it if it exists",
+                    "var prevMsg = Ext.get('msg-div');",
+                    "if(prevMsg) {",
+                    "    prevMsg.destroy();",
+                    "}",
+                    "",
+                    "var msgCt;",
+                    "if(!msgCt){",
+                    "    msgCt = Ext.core.DomHelper.insertFirst(insertPoint, {id:'msg-div'}, true);",
+                    "}",
+                    "var s = Ext.String.format.apply(String, Array.prototype.slice.call(arguments, 1));",
+                    "var m = Ext.core.DomHelper.append(msgCt, ctrl.createBox(title, str), true);",
+                    "m.hide();",
+                    "m.slideIn('t').ghost(\"t\", { delay: 1500, remove: true});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "popMsg",
+            "designerId": "c8cb46d9-63fb-4486-b701-d0090b3ada3a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "t",
+                    "s"
+                ],
+                "fn": "createBox",
+                "implHandler": [
+                    "return '<div class=\"msg\"><h3>' + t + '</h3><p>' + s + '</p></div>';"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "createBox",
+            "designerId": "564c4f3f-05ec-4e43-906c-59e0ed424019"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "window.appAdmin = this;",
+                    "",
+                    "// Adding ids to Ext.MessageBox buttons:",
+                    "window.setMsgButtonsIds = function(){",
+                    "    var i = 0, btn_text = \"\",",
+                    "        msg_box = document.getElementsByClassName('x-message-box')[0],",
+                    "        //buttons = msg_box.getElementsByTagName('button');",
+                    "        buttons = msg_box.getElementsByClassName('x-btn-inner'); // Extjs5",
+                    "",
+                    "    for(i = 0; i < buttons.length; i++){",
+                    "        btn_text = buttons[i].textContent;",
+                    "        if(btn_text == 'OK' || btn_text == 'Yes' || btn_text == 'No' || btn_text == 'Cancel'){",
+                    "            buttons[i].id = \"msgBtn\" + btn_text;",
+                    "        }",
+                    "    }",
+                    "};",
+                    "",
+                    "Ext.override(Ext.MessageBox, {",
+                    "    show: function(){ this.callParent(arguments); window.setMsgButtonsIds(); return this; }",
+                    "});",
+                    "",
+                    "",
+                    "Ext.Ajax.request({",
+                    "    url: '/softnas/snserver/snserv.php',",
+                    "    params: {",
+                    "        opcode: 'general_settings'",
+                    "    },",
+                    "    success: function(response, opts) {",
+                    "        var reply = Ext.decode(response.responseText);",
+                    "        if( !reply.success )",
+                    "        {",
+                    "            Ext.Msg.alert('Operation Error', reply.msg);",
+                    "        } else {",
+                    "            var txt_timeout = Ext.ComponentQuery.query(\"#txt_session_timeout\")[0];",
+                    "            txt_timeout.setValue(reply.data.timeout);",
+                    "        }",
+                    "    },",
+                    "    failure: function(response, opts) {",
+                    "        var reply;",
+                    "        if( response && response.responseText )",
+                    "            reply = Ext.decode(response.responseText);",
+                    "",
+                    "        if( reply && reply.msg )",
+                    "            Ext.Msg.alert('Operation Failed', reply.msg);",
+                    "        else",
+                    "            Ext.Msg.alert('Operation Failed', \"Error contacting server. Please resolve any network issues and try again.\");",
+                    "    }",
+                    "});",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "16f86e2c-56e2-4fa9-9dc9-b28b0702ec5a"
+        }
+    ]
+}

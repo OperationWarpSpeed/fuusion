@@ -1,0 +1,50 @@
+;; Basic Monit Settings
+POLLING_INTERVAL=30
+
+;; Services to monitor. Valid options "on" and "off"
+MONITOR_HTTPD="on"
+MONITOR_SSHD="on"
+MONITOR_SENDMAIL="on"
+MONITOR_WINBIND="on"
+MONITOR_NFS="on"
+MONITOR_ULTRAFAST="on"
+MONITOR_SMB="on"
+MONITOR_NMB="on"
+MONITOR_HOTSPARE="on"
+MONITOR_NTPD="on"
+MONITOR_MYSQL="on"
+MONITOR_NIFI="on"
+MONITOR_HA_WARN="on"
+
+;; Thresholds for system resources Valid options are "XX%"
+CPU_WARNING_USER="60%"
+CPU_WARNING_SYSTEM="30%"
+CPU_WARNING_WAIT="10%"
+MEMORY_WARNING="90%"
+DISK_SPACE_WARNING="80%"
+
+;; Monitor log files 
+;; Keywords to suppress notifications should be in regular expression form. For example to supress alerts for all error log entries containing the words foo or bar enter "foo|bar"
+MONITOR_SNSERV="yes"
+SUPRESS_KEYWORDS_SNSERV=""
+MONITOR_SNAPREPLICATE="yes"
+SUPRESS_KEYWORDS_SNAPREPLICATE=""
+
+;; Notifications
+;; If you want to use gmail SMTP set the following
+;; USE_EXT_SMTP="yes"	
+;; SMTP_MAILSERVER="smtp.gmail.com"
+;; SMTP_PORT="587"
+;; SMTP_USERNAME="user@gmail.com"
+;; SMTP_PASSWORD="password"
+;; SMTP_ENCRYPTION="tlsv1"
+;; Valid values for SMTP_ENCRYPTION are SSLV2, SSLV3 and TLSV1
+
+NOTIFICATION_EMAIL="admin@example.com"
+USE_EXT_SMTP="no"
+SMTP_MAILSERVER=""
+SMTP_PORT=""
+SMTP_USERNAME=""
+SMTP_PASSWORD=""
+SMTP_ENCRYPTION=""
+

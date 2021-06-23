@@ -1,0 +1,544 @@
+#!/bin/bash
+# Post installer script. Add updates in this file
+
+CURRENT_SOFTNAS_VERSION=$(cat /var/www/softnas/version)
+PRODROOT="/var/www"
+PRODPATH="/var/www/softnas"
+CONFIGDIR="/var/www/softnas/config"
+PRIORDIR="softnas.preupdate"
+UPDATE_STATUS="/tmp/softnas-update.status"
+UPDATE_STATE="/tmp/update_in_progress"
+HOST_SERVICE_NAME=$($PRODPATH/scripts/which_host.sh)
+PATH="/usr/local/bin:$PATH"
+export PATH
+chown root: /root/installtree/etc/sudoers
+
+# Run only once during the first installation of fuusion. 
+if [ ! -f /etc/softnas/first.installed ] ; then
+    /bin/bash /root/copytree.sh
+    WHOST=$(uname -r | awk -F "-" '{print $3}')
+    if [ "$WHOST" == "generic" ]; then
+	echo "vmware" > /var/www/softnas/config/which_host.ini
+   else
+	echo $WHOST > /var/www/softnas/config/which_host.ini
+   fi
+
+ # ensure softnas.ini is reset to starting configuration
+ echo '[support]' > $CONFIGDIR/softnas.ini
+ echo 'loglevel = "Info"' >> $CONFIGDIR/softnas.ini
+ echo 'supportemail="support@softnas.com"' >> $CONFIGDIR/softnas.ini
+ chown root:apache $CONFIGDIR/softnas.ini
+ chmod 660 $CONFIGDIR/softnas.ini
+
+ echo '[login]' > $CONFIGDIR/login.ini
+ echo 'timeout="15"' >> $CONFIGDIR/login.ini
+ echo 'session_folder="/tmp/softnas"' >> $CONFIGDIR/login.ini
+ echo 'encryption_key="Pass4W0rd"' >> $CONFIGDIR/login.ini
+ chown root:apache $CONFIGDIR/login.ini
+ chmod 660 $CONFIGDIR/login.ini
+
+ cp /var/www/softnas/config/monitoring.ini.prototype      /var/www/softnas/config/monitoring.ini
+ mkdir /etc/softnas
+ touch /etc/softnas/first.installed
+fi
+
+##### END OF RUN ONCE  ######
+
+# FOLLOWING ARE RUN AFTER EACH INSTALLATION ( TEMPLATE FROM UPDATE SCRIPT. ADD ALL UPDATES TO HERE )
+
+# use first IP address for SSL cert (excl localhost)
+IPADDR=$(ifconfig | grep "inet " | head -n 1 | awk '{print $2}')
+export IPADDR
+
+## /tmp stickybit causes permission denied for files written using apache in tmp folder when same file is tried to access via sudo.
+if ls -ld /tmp | grep drwxrwxrwt > /dev/null 2>&1 ; then
+	sudo chmod -t /tmp
+fi
+
+# #5609 - create /tmp/softnas-update.status to avoid monit error
+touch $UPDATE_STATUS
+
+# This is the location where we are downloading all files before update begins
+download_dir=/root/downloads
+mkdir -p $download_dir
+
+login_deploy(){
+	# if ! [ -f /var/www/softnas/config/login.integrated ]; then
+  #    # do integration tasks here
+	# fi
+  pushd /root/downloads
+    report_status "Creating cracklib dictionary.."
+    safe_download "https://www.softnas.com/software/dict.tbz"
+    tar xvjf dict.tbz -C /usr/share/
+    create-cracklib-dict /usr/share/dict/*
+  popd
+	report_status "Done with login system integration tasks"
+}
+
+#### widely used functions ##########################################
+#
+# Only put helper functions here that are used by others and not install and
+# configuration functions. Functions that manipulate progress bar, do cleanup,
+# get system information for you, etc, are valid examples; Functions that
+# perfomr any permanent system modification, are not.
+#
+
+safe_download(){
+# Downloads a file from internet. If failed, reports an error and terminates
+# update process.
+#####
+  time wget -N "$1"
+  if [ "$?" != "0" ]; then
+		report_status "Couldn't download \"$1\". Aborting update."
+		update_failed
+		exit 1
+  fi
+}
+
+timestamp(){
+  echo "$(date +%Y-%m-%d_%T)_$(date +%s%N);"
+}
+
+get_total_ram(){
+  # Print total system ram in bytes
+  ##########
+  free -bt | awk 'END {print $2}'
+}
+
+
+is_hvm(){
+  [ "$(dmidecode -s system-manufacturer)" = "Xen" ] || [ "$(dmidecode -s system-manufacturer)" = "Amazon EC2" ]
+}
+
+enter_clean_dir(){
+  mkdir -p "$1"
+  rm -rf "$1"
+  mkdir -p "$1"
+  pushd "$1"
+}
+exit_clean_dir(){
+  popd
+  rm -rf "$1"
+}
+
+report_status(){
+  # Echo to stdout and to file that is read by PHP.
+  ##########
+  echo "$1"
+}
+
+
+#### install and configuration functions ############################
+#
+# This is a place for functions that do actual installation or configuration on
+# the system. If any non-yum package is needed, it needs to be downloaded prior
+# to taking any system modification action, so downloading needs to be in
+# separate function.
+
+
+migrate_sqlpass_conf() {
+  if [ -f /root/sqlpass.conf ]; then
+    if [ -f $CONFIGDIR/sqlpass.conf ]; then
+      mv -f $CONFIGDIR/sqlpass.conf $CONFIGDIR/sqlpass.conf.bk
+    fi
+    mv -f /root/sqlpass.conf $CONFIGDIR/sqlpass.conf
+  fi
+}
+
+db_migrations(){
+  if [ -f /var/www/softnas/config/db-migrations.php ]; then
+    # copy config backup after update
+    cp /var/www/softnas/config/db-migrations.php /var/www/softnas/db-migrations/ruckusing.conf.php
+  fi
+  cd /var/www/softnas/db-migrations || (report_status "db-migrations directory did not exist. Abort update." && update_failed ; exit 1)
+
+  migrate_sqlpass_conf
+  if [ -f $CONFIGDIR/sqlpass.conf ]; then
+    source $CONFIGDIR/sqlpass.conf
+    storagecenter_dbauth "$USERPASSWORD"
+  else
+    report_status "SQL credentials seem to be unconfigured. Aborting update."
+    update_failed
+    exit 1
+  fi
+
+  echo "USERPASSWORD=$USERPASSWORD" > $CONFIGDIR/sqlpass.conf
+  php ruckus.php db:setup 2>-
+  php ruckus.php db:migrate
+  if [ $? -ne 0 ]; then
+    report_status "DB migrations failed. Aborting update."
+    update_failed
+    exit 1
+  else
+    report_status "DB migration complete"
+  fi
+  cd -  || (report_status "Could not leave db-migrations directory. Abort update." && update_failed ; exit 1)
+}
+
+storagecenter_dbauth(){
+	cp /var/www/softnas/config/database.php.dist /var/www/softnas/config/database.php
+	sed -i 's/REPLACETHISNAME/storagecenter/' /var/www/softnas/config/database.php
+	sed -i 's/REPLACETHISHOST/localhost/' /var/www/softnas/config/database.php
+	sed -i 's/REPLACETHISUSER/storagecenter/' /var/www/softnas/config/database.php
+	sed -i "s/REPLACETHISPASS/$1/" /var/www/softnas/config/database.php
+}
+
+mysql_deploy(){
+  migrate_sqlpass_conf
+  if [ -f $CONFIGDIR/sqlpass.conf ]; then
+    report_status "Skipping SQL credential configuration."
+    report_status "Performing DB migrations.."
+    source $CONFIGDIR/sqlpass.conf
+    sed -i 's/dbuser/storagecenter/g' /var/www/softnas/db-migrations/ruckusing.conf.php
+    sed -i "s/dbpass/$USERPASSWORD/g" /var/www/softnas/db-migrations/ruckusing.conf.php
+    cp /var/www/softnas/db-migrations/ruckusing.conf.php /var/www/softnas/config/db-migrations.php
+    db_migrations # see function above
+  else
+    report_status "Configuring SQL database credentials for the first time"
+    ROOTPASSWORD=$(uuidgen)
+    USERPASSWORD=$(uuidgen)
+    CREDENTIAL_PATH="$CONFIGDIR/sqlpass.conf"
+    touch $CREDENTIAL_PATH; chmod 600 "$CREDENTIAL_PATH"
+    echo "ROOTPASSWORD=$ROOTPASSWORD # root@localhost" > "$CREDENTIAL_PATH"
+    echo "USERPASSWORD=$USERPASSWORD # storagecenter@localhost" >> "$CREDENTIAL_PATH"
+    sed -i 's/dbuser/storagecenter/g' /var/www/softnas/db-migrations/ruckusing.conf.php
+    sed -i "s/dbpass/$USERPASSWORD/g" /var/www/softnas/db-migrations/ruckusing.conf.php
+    cp /var/www/softnas/db-migrations/ruckusing.conf.php /var/www/softnas/config/db-migrations.php
+    storagecenter_dbauth "$USERPASSWORD"
+    TEMP_SQL="/root/temp.sql"
+    echo "CREATE DATABASE storagecenter;" > "$TEMP_SQL"
+    echo "GRANT ALL PRIVILEGES ON storagecenter.* TO 'storagecenter'@'localhost' IDENTIFIED BY '$USERPASSWORD'; FLUSH PRIVILEGES;" >> "$TEMP_SQL"
+    mysql -u root < "$TEMP_SQL"
+    rm -f "$TEMP_SQL"
+    mysqladmin -u root password "$ROOTPASSWORD"
+
+    report_status "Verifying SQL connectivity"
+    mysql -u root --password="$ROOTPASSWORD" --execute "SHOW TABLES" storagecenter 2>- 1>-
+    if [ $? -ne 0 ]; then
+      report_status "SQL deployment failed: authentication test did not succeed. Aborting update."
+      update_failed
+      exit 1
+    else
+      report_status "SQL configuration succeeded"
+    fi
+
+    report_status "Deploying SQL database"
+    cd /var/www/softnas/db-migrations || (report_status "db-migrations directory did not exist. Abort update." && update_failed ; exit 1)
+    php ruckus.php db:setup
+    if [ $? -ne 0 ]; then
+      report_status "SQL db-migrations initialization failed. Aborting update."
+      update_failed
+      exit 1
+    else
+      report_status "SQL schema versioning initialized. Importing initial tables.."
+    fi
+
+    db_migrations
+    if [ $? -ne 0 ]; then
+      report_status "Schema import failed. Aborting update."
+      update_failed
+      exit 1
+    fi
+
+    report_status "SQL configuration complete."
+    sleep 3
+    cd - || (report_status "db-migrations directory did not exist. Abort update." && update_failed ; exit 1)
+  fi
+}
+
+
+update_configuration_files(){
+
+  ### update Azure GUID
+  echo 'pid-84fd479c-c124-5a45-bef2-fc681f5c9ccb' > $PRODPATH/config/azure_track_id
+  chmod 666 $PRODPATH/config/azure_track_id
+}
+
+configure_nfs(){
+  number_of_threads=$(grep "RPCNFSDCOUNT=[0-9]*" /etc/default/nfs-kernel-server | awk -F"=" '{print $2}')
+  if [ "$number_of_threads" = "8" ] || [ "$number_of_threads" = "64" ]; then
+    total_ram=$(get_total_ram)
+    new_num_of_threads=$(echo "( $total_ram / 1024 / 1024 / 1024 + 1 ) * 15" | bc)
+    if [ $new_num_of_threads -gt 1024 ]; then
+      new_num_of_threads=1024
+    fi
+    report_status "Updating number of NFS threads to $new_num_of_threads."
+    sed -r -i 's/^\s*#?\s*RPCNFSDCOUNT=[0-9]*/RPCNFSDCOUNT='"$new_num_of_threads"'/' /etc/default/nfs-kernel-server
+    /usr/sbin/rpc.nfsd "$new_num_of_threads"
+  fi
+  idmapping=$(cat /sys/module/nfsd/parameters/nfs4_disable_idmapping)
+  if [ "$idmapping" != "" ] && [ "$idmapping" != "N" ]; then
+    echo "N" > /sys/module/nfsd/parameters/nfs4_disable_idmapping;
+    nfsidmap -c
+    /etc/init.d/nfs-kernel-server restart
+  fi
+}
+
+swap_deploy(){
+	HOST_SERVICE_NAME=$("$PRODPATH/scripts/which_host.sh")
+  # both AWS and Azure need swap files created
+	if [[ $HOST_SERVICE_NAME == 'aws' || $HOST_SERVICE_NAME == 'azure' ]]; then
+		if [ -f /swap.img ]; then
+			report_status "Swap is already configured"
+		else
+			report_status "Configuring 4GB swapfile.. (this may take a while)"
+			dd if=/dev/zero of=/swap.img bs=1M count=4096 1>- 2>-
+			mkswap /swap.img && swapon /swap.img && report_status "Swap configured." || report_status "Swap configuration error!"
+		fi
+	else
+		report_status "No swap configuration is necessary"
+	fi
+}
+
+softnas_update(){
+
+    migrate_sqlpass_conf
+    if [ -f $CONFIGDIR/sqlpass.conf ]; then
+      source $CONFIGDIR/sqlpass.conf
+      storagecenter_dbauth "$USERPASSWORD"
+    else
+      report_status "Unable to repair DB authentication because the required file $CONFIGDIR/sqlpass.conf did not exist."
+    fi
+
+    # set the type of host
+    HOST_SERVICE_NAME=$("$PRODPATH/scripts/which_host.sh")
+  exit_clean_dir softnas
+}
+
+check_api(){
+  install_api=false
+  api_version=0.0.8.32
+  current_api_version=$(cat /usr/local/bin/softnas-cmd | grep VERSION= | awk -F'"' '{print $2}')
+  if [ "$api_version" != "$current_api_version" ]; then
+    install_api=true
+  fi
+}
+download_api(){
+  if "$install_api"; then
+    mkdir -p "$download_dir/api"
+    pushd "$download_dir/api"
+      safe_download "https://mirror.softnas.com/fuusion/api/softnas-api-$api_version.tar.gz"
+    popd
+  fi
+}
+install_api(){
+  if "$install_api"; then
+    report_status "Installing softnas api version: $api_version"
+    pushd /var/www/softnas
+      tar -xvf "$download_dir/api/softnas-api-$api_version.tar.gz" ./
+      # resolve PATH issues
+      ln -sf /var/www/softnas/api/softnas-cmd /usr/local/bin/softnas-cmd
+      ln -sf /var/www/softnas/api/softnas-cmd /usr/bin/softnas-cmd
+      ln -sf /var/www/softnas/api/softnas-cmd /bin/softnas-cmd
+    popd
+    chown -R root:apache /var/www/softnas/api
+  fi
+}
+
+add_permission_to_config_dir() {
+  # set configuration file permissions #5497
+  chown -R root:apache /var/www/softnas/config
+  chmod -R 770 /var/www/softnas/config
+}
+
+update_ssh_config() {
+  # 6644 - Bump up MaxStartups, LoginGraceTime and MaxAuthTries
+  sed -i -e 's/[#]\?MaxStartups.*/MaxStartups 300:30:500/g' /etc/ssh/sshd_config
+  if ! grep -q "^MaxStartups" /etc/ssh/sshd_config; then
+    echo -e "\n#Bump up to support more ssh connections \
+             \nMaxStartups 300:30:500" >> /etc/ssh/sshd_config
+  fi
+  sed -i -e 's/[#]\?LoginGraceTime.*/LoginGraceTime 5m/g' /etc/ssh/sshd_config
+  if ! grep -q "^LoginGraceTime" /etc/ssh/sshd_config; then
+    echo -e "\n#Bump up to allow more time for client to authenticate \
+             \nLoginGraceTime 5m" >> /etc/ssh/sshd_config
+  fi
+  sed -i -e 's/[#]\?MaxAuthTries.*/MaxAuthTries 30/g' /etc/ssh/sshd_config
+  if ! grep -q "^MaxAuthTries" /etc/ssh/sshd_config; then
+    echo -e "\n#Bump up to allow more client retries before giving up \
+             \nMaxAuthTries 30" >> /etc/ssh/sshd_config
+  fi
+  # Extend server's timeout before terminating unresponsive client connection
+  sed -i -e 's/[#]\?ClientAliveInterval.*/ClientAliveInterval 60/g' /etc/ssh/sshd_config
+  if ! grep -q "^ClientAliveInterval" /etc/ssh/sshd_config; then
+    echo -e "\nClientAliveInterval 60" >> /etc/ssh/sshd_config
+  fi
+  sed -i -e 's/[#]\?ClientAliveCountMax.*/ClientAliveCountMax 5/g' /etc/ssh/sshd_config
+  if ! grep -q "^ClientAliveCountMax" /etc/ssh/sshd_config; then
+    echo -e "\nClientAliveCountMax 5" >> /etc/ssh/sshd_config
+  fi
+
+  #Enable HPN #18873
+  if ! grep -q "HPNDisabled" /etc/ssh/sshd_config; then
+    echo -e "\n#Enable HPN \nTcpRcvBufPoll yes \nHPNDisabled no \nHPNBufferSize 2048 " >> /etc/ssh/sshd_config
+ fi
+  /etc/init.d/ssh restart
+}
+
+check_api
+
+### perform downloads
+#
+report_status "Downloading packages..."
+download_api
+
+### perform upgrades
+#
+swap_deploy
+configure_nfs
+softnas_update
+mysql_deploy
+install_api
+update_ssh_config
+add_permission_to_config_dir
+update_configuration_files
+
+report_status "Updates installed. Setting permissions..."
+
+# create symlink into /var/log/softnas
+ln -s /var/www/softnas/logs /var/log/softnas 2> /dev/null
+
+# Apply azure tag - #6761
+/var/www/softnas/scripts/azuretag.sh
+
+# move the release notes into html directory
+cp -rpf /var/www/softnas/html/release_notes* /var/www/html/
+
+# Copy customer's settings across (handle upgrade case when logs were originally in snserv directory - now moved to config)
+[ -f /$PRODROOT/$PRIORDIR/config/database.php ] && cp $PRODROOT/$PRIORDIR/config/database.php $PRODPATH/config/database.php
+
+[ -f /$PRODROOT/$PRIORDIR/config/softnas.ini ] && cp $PRODROOT/$PRIORDIR/config/softnas.ini $PRODPATH/config/softnas.ini
+touch $PRODPATH/config/softnas.ini
+chown root:apache $PRODPATH/config/softnas.ini
+chmod 660 $PRODPATH/config/softnas.ini
+
+# copy customer's schedules.ini file across
+[ -f /$PRODROOT/$PRIORDIR/config/schedules.ini ] && cp $PRODROOT/$PRIORDIR/config/schedules.ini $PRODPATH/config/
+touch $PRODPATH/config/schedules.ini
+schedules_ini_data="$(cat $PRODPATH/config/schedules.ini)"
+if [ "$schedules_ini_data" = "" ]; then
+  cp $PRODPATH/config/schedules.ini.prototype $PRODPATH/config/schedules.ini
+fi
+chown root:apache $PRODPATH/config/schedules.ini
+chmod 660 $PRODPATH/config/schedules.ini
+
+# copy customer's login.ini file across
+[ -f /$PRODROOT/$PRIORDIR/config/login.ini ] && cp $PRODROOT/$PRIORDIR/config/login.ini $PRODPATH/config/
+chown root:apache $PRODPATH/config/login.ini
+chmod 660 $PRODPATH/config/login.ini
+
+################################
+## DO NOT COPY THIS! This file can change during the update process!! [ -f $PRODROOT/$PRIORDIR/config/snaprepstatus.ini ] && cp $PRODROOT/$PRIORDIR/config/snaprepstatus.ini $PRODPATH/config
+
+# copy customer's monitoring.ini file across
+[ -f $PRODROOT/$PRIORDIR/config/monitoring.ini ] && cp $PRODROOT/$PRIORDIR/config/monitoring.ini $PRODPATH/config
+[ -f $PRODPATH/config/monitoring.ini ] || cp $PRODPATH/config/monitoring.ini.prototype $PRODPATH/config/monitoring.ini
+
+echo "updating monit configuration"
+chown root:apache $PRODPATH/config/monitoring.ini
+chmod 660 $PRODPATH/config/monitoring.ini
+
+# copy customers HA AWS IAM credentials config files across
+[ -f $PRODROOT/$PRIORDIR/config/aws_iam.ini ] && cp $PRODROOT/$PRIORDIR/config/aws_iam.ini $PRODPATH/config
+[ -f $PRODPATH/config/aws_iam.ini ] && chown root:apache $PRODPATH/config/aws_iam.ini && chmod 660 $PRODPATH/config/aws_iam.ini
+
+# 15331 - Replace # with ; as parse_ini_file in php7 no longer treats # as comment line
+for i in $PRODPATH/config/*.ini*; do
+  sed -i 's/#/;/g' $i
+done
+
+# copy customer's key files across and ensure only root can access the
+# SnapReplicate keys
+if [ ! -d "$PRODPATH/keys" ]; then
+  mkdir $PRODPATH/keys
+fi
+chown root:apache $PRODPATH/keys
+chmod 755 $PRODPATH/keys
+cp -r $PRODROOT/$PRIORDIR/keys/* $PRODPATH/keys
+chmod 755 $PRODPATH/snserver/Email $PRODPATH/snserver/Email/Mail $PRODPATH/snserver/Email/Net
+
+if [ ! -d "$PRODPATH/data" ]; then
+  rm -f $PRODPATH/data
+  mkdir $PRODPATH/data
+  chown root:root $PRODPATH/data
+  chmod 640 $PRODPATH/data
+fi
+
+cp $PRODPATH/api/softnas-cmd /usr/local/bin
+chown root:root /usr/local/bin/softnas-cmd
+chmod 755 /usr/local/bin/softnas-cmd
+
+report_status "Permissions updated."
+
+rm -rf /tmp/softnascfg/*
+
+report_status "Installing system configuration updates..."
+sleep 2
+
+# installtree copies pre-configured system configuration files,
+# script and other system mods
+sudo /root/copytree.sh
+
+# 16154 -  Get user configured fd limit before overwriting /etc/sysctl.conf via /root/copytree.sh
+MAX_FD=$(cat /proc/sys/fs/file-max)
+
+# 16154 - If user has configured MAX_FD > 1048756, preserve it, otherwise, set to default 1048756
+if [ $MAX_FD -gt 1048756 ]; then
+  sed -i "s/fs.file-max.*/fs.file-max=$MAX_FD/g" /etc/sysctl.conf
+fi
+
+# ubuntu pam authentication minimum-uid is above 10000 to avoid krb password change issues.
+sed -i 's/\<minimum_uid=1000\>/minimum_uid=5000/g' /etc/pam.d/common-password
+
+# 18317 - Fix python error of softnas-cmd
+sed -ie 's/print json.dumps(sys.stdin.read())/print(json.dumps(sys.stdin.read()))/g' $PRODPATH/api/softnas-cmd
+# 18957 - Remove quotes of PATH value in /etc/environment
+sed -ie 's/\"//g' /etc/environment
+
+report_status "Updating scheduled tasks..."
+
+# install SoftNAS crontab tasks
+# (there should be no other crontab entries for root)
+# Remove btier entries if it is in the root crontab
+sed -i '/btier_migrate_threshold.php/d' /var/spool/cron/crontabs/root
+crontab - < "$PRODPATH/scripts/crontab.softnas"
+
+# regenerate /etc/hosts
+if ! [ -d /etc/hosts.d ]; then
+  mkdir -p /etc/hosts.d
+  mv /etc/hosts /etc/hosts.d/system
+fi
+
+#18051
+usermod -c "" buurst
+
+#18057
+if [ ! -f /var/www/buurst ]; then
+	ln -s /var/www/softnas /var/www/buurst
+	ln -s /var/www/softnas/storagecenter /var/www/buurst/fuusion
+fi
+
+# regenerate monit config and start monitoring
+$PRODPATH/scripts/config-generator-monit.sh
+
+if [ -f /etc/init.d/softnas ]; then
+   /lib/systemd/systemd-sysv-install enable softnas
+fi
+
+# Disable tmp cleanup in ubuntu
+if [ -f "/usr/lib/tmpfiles.d/tmp.conf" ] ; then
+	rm -f /usr/lib/tmpfiles.d/tmp.conf
+fi
+
+#https://github.com/sudo-project/sudo/issues/42
+echo "Set disable_coredump false" >> /etc/sudo.conf
+
+#For docker
+if [ ! -f "/bin/fuusion" ] ; then
+	ln -s /var/www/softnas/scripts/fuusion-start.sh /bin/fuusion
+fi
+
+# set configuration file permissions just in case
+/var/www/softnas/scripts/reset_permissions.sh
+exit 0
+

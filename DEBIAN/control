@@ -1,0 +1,12 @@
+Package: fuusion-ui
+Section: custom
+Priority: optional
+Architecture: amd64
+Essential: no
+Installed-Size: 50M
+Pre-Depends: fuusion-dependency
+Replaces: softnas
+Conflicts: softnas
+Provides: softnas
+Maintainer: www.buurst.com
+Version:

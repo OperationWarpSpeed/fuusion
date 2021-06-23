@@ -1,0 +1,13 @@
+#/bin/bash
+# CleanScripts - clean up compiled scripts
+#
+DRIVER=../shellcrypt/driver
+
+FILELIST=`ls *.sh`
+echo "Erasing prior versions..."
+for file in $FILELIST
+do
+  BASE=`basename $file .sh`
+  rm -f $BASE 
+done
+

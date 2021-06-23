@@ -1,0 +1,55 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "LicenseStore",
+        "model": "LicenseModel",
+        "storeId": "LicenseStore"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "designerId": "06fff96d-1ae3-4196-b911-ec410fb16db7",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Rest",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "/softnas/snserver/snserv.php?opcode=licenseinfo"
+            },
+            "configAlternates": {
+                "url": "string"
+            },
+            "name": "MyRestProxy1",
+            "designerId": "dbecef83-20b8-43e7-bf2b-b4de126f7307",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "records"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader1",
+                    "designerId": "deba8a50-3cae-464c-b6cd-9b2141874a6a"
+                }
+            ]
+        }
+    ]
+}

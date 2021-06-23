@@ -1,0 +1,6 @@
+build-fuusion-dependency.sh - build deb package for installing all pre required packages. This is needed only once and hence configured separately
+build-jdk.sh - downloads jdk from softnas.com and creates deb
+build-nifi-deb.sh - downloads rpm and creates deb
+update-apt-repo.sh - for signing deb packages
+
+fuusion - The folder contains deb package scripts for building fuusion-x.x.x.deb . This is a dummy package used for installing fuusion-ui and other fussion packages. This is used to avoid circular dependency.

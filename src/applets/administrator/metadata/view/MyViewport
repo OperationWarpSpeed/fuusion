@@ -1,0 +1,418 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "myviewport",
+        "designer|userClassName": "MyViewport",
+        "itemId": "myviewport2",
+        "layout": "border"
+    },
+    "configAlternates": {
+        "scrollable": "boolean",
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "itemId": "string",
+        "layout": "string"
+    },
+    "designerId": "16665762-c358-4421-9ebe-9271658e0cd2",
+    "viewControllerInstanceId": "098eb399-dc86-4c61-8b73-1062e295c71c",
+    "viewModelInstanceId": "b0a88cbf-c49a-4773-b4a8-71b4b821bc44",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|region": "center",
+                "title": ""
+            },
+            "configAlternates": {
+                "layout|region": "string",
+                "title": "string"
+            },
+            "name": "MyPanel",
+            "designerId": "c3e23395-10b4-4346-806d-1cfe78b3f51c",
+            "cn": [
+                {
+                    "type": "Ext.form.FieldSet",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 115,
+                        "id": "settings_panel",
+                        "itemId": "settings_panel",
+                        "margin": 10,
+                        "title": "Settings",
+                        "width": 500
+                    },
+                    "configAlternates": {
+                        "height": "auto",
+                        "id": "string",
+                        "itemId": "string",
+                        "margin": "auto",
+                        "title": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyFieldSet",
+                    "designerId": "8c9ce4b1-2f2a-4c4e-a87a-864a64d758ee",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Number",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "allowBlank": false,
+                                "allowDecimals": false,
+                                "allowExponential": false,
+                                "allowOnlyWhitespace": false,
+                                "dock": null,
+                                "fieldLabel": "Session Timeout (mins)",
+                                "id": "txt_session_timeout",
+                                "itemId": "txt_session_timeout",
+                                "labelWidth": 170,
+                                "layout|anchor": "100%",
+                                "maxValue": 90,
+                                "maxWidth": 270,
+                                "minValue": 15,
+                                "name": "txt_session_timeout",
+                                "value": [
+                                    "30"
+                                ]
+                            },
+                            "configAlternates": {
+                                "allowBlank": "boolean",
+                                "allowDecimals": "boolean",
+                                "allowExponential": "boolean",
+                                "allowOnlyWhitespace": "boolean",
+                                "dock": "string",
+                                "fieldLabel": "string",
+                                "id": "string",
+                                "itemId": "string",
+                                "labelWidth": "number",
+                                "layout|anchor": "string",
+                                "maxValue": "number",
+                                "maxWidth": "number",
+                                "minValue": "number",
+                                "name": "string",
+                                "value": "object"
+                            },
+                            "name": "MyNumberField",
+                            "designerId": "50e5e720-f515-447a-8642-f71b95614daf"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 30,
+                                "id": "btn_save_settings",
+                                "itemId": "btn_save_settings",
+                                "margin": "25 0 0 380",
+                                "text": "Save settings",
+                                "width": 90
+                            },
+                            "configAlternates": {
+                                "height": "auto",
+                                "id": "string",
+                                "itemId": "string",
+                                "margin": "auto",
+                                "text": "string",
+                                "width": "auto"
+                            },
+                            "name": "MyButton1",
+                            "designerId": "89a8deb9-9079-4676-8541-2ddf2a01fbee",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onBtn_save_settingsClick",
+                                        "implHandler": [
+                                            "var txt_timeout = Ext.ComponentQuery.query(\"#txt_session_timeout\")[0];",
+                                            "var timeout = txt_timeout.getValue();",
+                                            "var settings_panel = Ext.ComponentQuery.query(\"#settings_panel\")[0];",
+                                            "",
+                                            "if (timeout < txt_timeout.minValue || timeout > txt_timeout.maxValue) {",
+                                            "    Ext.Msg.alert(\"Save settings\", \"Please enter the valid value\");",
+                                            "    return;",
+                                            "}",
+                                            "",
+                                            "settings_panel.setLoading('Saving settings...');",
+                                            "Ext.Ajax.request({",
+                                            "    url: '/softnas/snserver/snserv.php',",
+                                            "    params: {",
+                                            "        opcode: 'general_settings',",
+                                            "        command: 'update_fuusion_settings',",
+                                            "        timeout: timeout",
+                                            "    },",
+                                            "    success: function(response, opts) {",
+                                            "        settings_panel.setLoading(false);",
+                                            "        var reply = Ext.decode(response.responseText);",
+                                            "        if( !reply.success )",
+                                            "        {",
+                                            "            Ext.Msg.alert('Operation Error', reply.msg);",
+                                            "        } else {",
+                                            "            Ext.Msg.alert(\"Save settings\", reply.msg);",
+                                            "        }",
+                                            "    },",
+                                            "    failure: function(response, opts) {",
+                                            "        settings_panel.setLoading(false);",
+                                            "        var reply;",
+                                            "        if( response && response.responseText )",
+                                            "            reply = Ext.decode(response.responseText);",
+                                            "",
+                                            "        if( reply && reply.msg )",
+                                            "            Ext.Msg.alert('Operation Failed', reply.msg);",
+                                            "        else",
+                                            "            Ext.Msg.alert('Operation Failed', \"Error contacting server. Please resolve any network issues and try again.\");",
+                                            "    }",
+                                            "});",
+                                            ""
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onBtn_save_settingsClick",
+                                    "designerId": "6e25bf2b-d8e4-4494-a14c-6d00a21e27fe"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.FieldSet",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 180,
+                        "id": "support_panel",
+                        "itemId": "support_panel",
+                        "margin": 10,
+                        "title": "Support",
+                        "width": 500
+                    },
+                    "configAlternates": {
+                        "height": "auto",
+                        "id": "string",
+                        "itemId": "string",
+                        "margin": "auto",
+                        "title": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyFieldSet1",
+                    "designerId": "2f0636e7-35cc-4464-a541-efecd9c24fb6",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "emptyText": "email@example.com",
+                                "fieldLabel": "Your Email",
+                                "id": "txt_support_email",
+                                "inputType": "email",
+                                "itemId": "txt_support_email",
+                                "layout|anchor": "100%",
+                                "name": "txt_support_email"
+                            },
+                            "configAlternates": {
+                                "emptyText": "string",
+                                "fieldLabel": "string",
+                                "id": "string",
+                                "inputType": "string",
+                                "itemId": "string",
+                                "layout|anchor": "string",
+                                "name": "string"
+                            },
+                            "name": "MyTextField",
+                            "designerId": "550b0cc3-f711-48b2-956b-def9eafd1a68"
+                        },
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "emptyText": "Exisitng Support Ticket ID",
+                                "fieldLabel": "Support Ticket ID",
+                                "id": "txt_support_ticket",
+                                "itemId": "txt_support_ticket",
+                                "layout|anchor": "100%",
+                                "name": "txt_support_ticket"
+                            },
+                            "configAlternates": {
+                                "emptyText": "string",
+                                "fieldLabel": "string",
+                                "id": "string",
+                                "itemId": "string",
+                                "layout|anchor": "string",
+                                "name": "string"
+                            },
+                            "name": "MyTextField1",
+                            "designerId": "2a97e038-8de1-4be3-b0e6-2ef595092981"
+                        },
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "style": [
+                                    "{color:'#999999'}"
+                                ],
+                                "text": "Submit diagnostic information to Buurst for technical support purposes. You will receive a link to download the same diagnostic data that is sent to Buurst."
+                            },
+                            "configAlternates": {
+                                "style": "object",
+                                "text": "string"
+                            },
+                            "name": "MyLabel",
+                            "designerId": "31fcd346-f0b0-4633-b617-479f246c5284"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 30,
+                                "id": "btn_support_send",
+                                "itemId": "btn_support_send",
+                                "margin": "25 0 0 380",
+                                "text": "Send",
+                                "width": 90
+                            },
+                            "configAlternates": {
+                                "height": "auto",
+                                "id": "string",
+                                "itemId": "string",
+                                "margin": "auto",
+                                "text": "string",
+                                "width": "auto"
+                            },
+                            "name": "MyButton",
+                            "designerId": "8948f04f-a1da-42f1-a127-3898490e8880",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onBtn_support_sendClick",
+                                        "implHandler": [
+                                            "var txt_email = Ext.ComponentQuery.query(\"#txt_support_email\")[0];",
+                                            "var txt_ticket = Ext.ComponentQuery.query(\"#txt_support_ticket\")[0];",
+                                            "var support_panel = Ext.ComponentQuery.query(\"#support_panel\")[0];",
+                                            "",
+                                            "var email_value = txt_email.getValue();",
+                                            "var ticket_value = txt_ticket.getValue();",
+                                            "",
+                                            "if (email_value === \"\") {",
+                                            "    Ext.Msg.alert('Support', 'You must enter email first!');",
+                                            "    return;",
+                                            "}",
+                                            "if (!txt_email.isValid()) {",
+                                            "    Ext.Msg.alert('Support', 'You must enter email in correct format!');",
+                                            "    return;",
+                                            "}",
+                                            "if (ticket_value === \"\") {",
+                                            "    Ext.Msg.alert('Support', 'You must enter ticket first!');",
+                                            "    return;",
+                                            "}",
+                                            "",
+                                            "support_panel.setLoading(\"Sending support report, please wait . . .\");",
+                                            "Ext.Ajax.request({",
+                                            "    url: '/softnas/snserver/snserv.php',",
+                                            "    params: {",
+                                            "        opcode: 'support_settings',",
+                                            "        command: 'send',",
+                                            "        email_user: email_value,",
+                                            "        support_ticket: ticket_value",
+                                            "    },",
+                                            "    timeout: 600000,",
+                                            "    success: function(response, opts) {",
+                                            "        support_panel.setLoading(false);",
+                                            "        var reply = Ext.decode(response.responseText);",
+                                            "        if( !reply.success ) {",
+                                            "            Ext.Msg.alert('Operation Error', reply.msg);",
+                                            "        } else {",
+                                            "            Ext.Msg.alert(\"Support\", reply.msg);",
+                                            "        }",
+                                            "    },",
+                                            "    failure: function(response, opts) {",
+                                            "        support_panel.setLoading(false);",
+                                            "        var reply;",
+                                            "        if(response && response.responseText) {",
+                                            "            reply = Ext.decode(response.responseText);",
+                                            "        }",
+                                            "        if(reply && reply.msg) {",
+                                            "            Ext.Msg.alert('Operation Failed', reply.msg);",
+                                            "        } else {",
+                                            "            Ext.Msg.alert('Operation Failed', \"Error contacting server. Please resolve any network issues and try again.\");",
+                                            "        }",
+                                            "    }",
+                                            "});"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string",
+                                        "scope": "string"
+                                    },
+                                    "name": "onBtn_support_sendClick",
+                                    "designerId": "e7846b2b-5a77-4cd6-a8c5-f6449e678297"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

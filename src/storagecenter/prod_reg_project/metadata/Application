@@ -1,0 +1,52 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "appFolder": "/../app",
+        "controllers": [
+            "ProdRegController"
+        ],
+        "name": "iFrame",
+        "views": [
+            "MyViewport",
+            "ProdRegWindow",
+            "FeatureRequestWindow"
+        ]
+    },
+    "configAlternates": {
+        "appFolder": "string",
+        "controllers": "typedarray",
+        "name": "string",
+        "views": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "iFrame.prodRegW = Ext.create('iFrame.view.ProdRegWindow', {renderTo: Ext.getBody()});",
+                    "iFrame.featureW = Ext.create('iFrame.view.FeatureRequestWindow', {renderTo: Ext.getBody()});",
+                    "iFrame.request_url = \"/softnas/snserver/snserv.php\";"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "1b1fea78-ccb5-46a0-8336-0f2544891114"
+        }
+    ]
+}

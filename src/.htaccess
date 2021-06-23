@@ -1,0 +1,46 @@
+<IfModule mod_rewrite.c>
+ RewriteEngine On
+
+ # disable embedding in IFRAME
+ Header always append X-Frame-Options SAMEORIGIN
+
+ RewriteCond %{HTTPS} off
+ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,N]
+
+ RewriteCond %{HTTPS} on
+ RewriteCond %{REQUEST_URI} ^/softnas/$
+ RewriteRule (.*) /softnas/index.php [L,N]
+
+ # rewrite login-related PHP files from home directory to snserver folder
+ RewriteCond %{REQUEST_URI} ^/softnas/(index.php|login.php|logout.php|timeout.php)$
+ RewriteRule ^(.*)$ /softnas/snserver/$1 [L,N]
+
+ RewriteCond %{REQUEST_URI} ^/softnas/(keys|logs|scripts|version|config|data|files|LICENSE|php-utils).*
+ RewriteRule ^(.*)$ /softnas/login.php [L,R]
+
+ # if cookie is set and file exists, and session cookie is still present, stop rewriting and show page
+ RewriteCond %{HTTPS} on
+ RewriteCond "port%{SERVER_PORT} %{HTTP_COOKIE}" (port\d{2,5}).*(USER_SESSION_\1)
+ RewriteCond "port%{SERVER_PORT} %{HTTP_COOKIE}" (port\d{2,5}).*(USER_SS_\1)=([a-zA-Z0-9]+)
+ RewriteCond /tmp/softnas/%3 -f
+ RewriteRule ^(.*)$ - [S=4]
+
+ # allow certain items through without login required
+ RewriteCond %{HTTPS} on
+ RewriteCond %{REQUEST_URI} ^/softnas/(css|images|applets/update|applets/cloudessentials|snserver/hafence.php|snserver/login.php|snserver/timeout.php).*
+ RewriteRule ^(.*)$ - [S=3]
+
+ # if cookie is set but folder file does not exists, user has no access to given folder
+ RewriteCond %{HTTPS} on
+ RewriteCond "port%{SERVER_PORT} %{HTTP_COOKIE}" (port\d{2,5}).*(USER_SS_\1)=([a-zA-Z0-9]+)
+ RewriteCond /tmp/softnas/%3 !-f
+ RewriteRule ^(.*)$ /softnas/login.php?original_url=$1 [L,R]
+
+ ## if user is not authorized, redirect to login page
+ # BrowserMatch "MSIE" force-no-vary
+ RewriteRule ^(.*)$ /softnas/login.php?original_url=$1 [L,R]
+
+## Rule for Error Page - 404 ##
+ErrorDocument 404 /softnas/snserver/404.php
+
+</IfModule>

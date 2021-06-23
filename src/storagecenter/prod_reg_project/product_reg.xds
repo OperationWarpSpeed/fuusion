@@ -1,0 +1,63 @@
+{
+    "name": "product_reg",
+    "settings": {
+        "cmd": {
+            "license": "commercial",
+            "cmdVersion": "6.6.0.13",
+            "frameworkVersion": "5.1.4.338"
+        },
+        "projectHasEnabledWebServer": false,
+        "urlPrefix": "http://localhost/softnas_trunk/applets/product_reg/",
+        "exportPath": "",
+        "lockUrlPrefix": false,
+        "buildShouldOverwriteIndex": false,
+        "generateArchitectVersion": true,
+        "spacesToIndent": 4,
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "installStatus": "Not Installed",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "displayfield-ExtBox1-1129-inputEl": "a new version of the framework is available",
+        "displayfield-ExtBox1-1195-inputEl": "a new version of the framework is available",
+        "sdkPath": "",
+        "urlPrefixTemplate": "http://localhost:{port}/{path}"
+    },
+    "xdsVersion": "4.2.4",
+    "xdsBuild": 389,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "ext51",
+    "viewOrderMap": {
+        "view": [
+            "8452aa15-c19c-464d-b659-0cc30bedabae",
+            "6ca74b5a-c4bf-43ba-aada-ad601c103f43",
+            "8f73ceb9-374d-4434-892b-5873ae6c77cd",
+            "b6b1f67e-90f7-4aa1-b8bc-96cdc99954b3",
+            "60b82bed-3b36-4f72-9f03-a3d1ef034b7e",
+            "c7283603-911e-40eb-8cea-dbd138b5a25e",
+            "4813ef13-3352-4407-830f-846aabf0a7d7",
+            "274b55ea-0819-437c-831f-87705b2ca405",
+            "fa348b68-60da-4e47-9b0d-04e1006e3188"
+        ],
+        "store": [],
+        "controller": [
+            "be296ae6-2efc-4a4d-ab0e-27b639453927"
+        ],
+        "model": [],
+        "resource": [
+            "b5e5ca01-a6cd-4004-aa30-f47da3d89e8b",
+            "7acb702f-8f74-415f-8ead-31bd0fac1177"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

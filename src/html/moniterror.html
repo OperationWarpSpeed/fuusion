@@ -1,0 +1,30 @@
+<?php ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Monitoring Service Not Running</title>
+</head>
+
+<body>
+<div style="margin: 20px; 0 20px 20px;">
+<img src="/softnas/images/Logo_300.png" />
+<br />
+<h1>Monitoring Service Not Running;</h1>
+<div style="margin: 0 0 0 10px;">
+<div>
+<h3>Why am I seeing this message?</h3>
+<p>SoftNAS&reg; has detected that monitoring service is not running when trying to contact the server system over the network. This can happen when there is a syntax error in config file /etc/monit.conf, that makes monitoring service unable to start.</p>
+
+<h3>What can I do to troubleshoot this issue?</h3>
+<p>You can try to restart monitoring service. Open <a href="../html/webadmin.php?path=/init/">System services</a> -> Select Monit service -> Click restart -> Reload this frame</p>
+<p>If the problem persists, open  <a href="../applets/administrator/" target="_blank">administrator settings</a> -> Click monitoring tab -> Correct monitoring settings -> Save (if everything is ok you will see success message) -> Reload this frame. </p>
+<p>If the problem persists, you can <a href="https://www.softnas.com/wp/support/" target="_blank">Contact Support</a> if you are unsure why this is happening or need assistance to resolve it.</p>
+<p><h3><strong><a href="#" onclick="location.reload(true); return false;">Click Here to reload this frame</a></strong> after the issue has been resolved or to try again.</h3></p>
+<br />
+<p></p>
+</div>
+</div>
+</body>
+</html>
+

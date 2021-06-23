@@ -1,0 +1,38 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "ProdRegController"
+    },
+    "name": "MyController",
+    "designerId": "be296ae6-2efc-4a4d-ab0e-27b639453927",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "textfield",
+                "designer|targetType": "Ext.form.field.Text",
+                "fn": "onTextfieldBeforeRender",
+                "implHandler": [
+                    "//console.log(component, component.allowBlank);return;",
+                    "if (component.allowBlank === false) {",
+                    "    component.fieldLabel += '<span class=\"req\" style=\"color:red\">*</span>';",
+                    "}"
+                ],
+                "name": "beforerender",
+                "scope": "me"
+            },
+            "name": "onTextfieldBeforeRender",
+            "designerId": "f9633b86-4f82-467c-8745-eef73c194c5f"
+        }
+    ]
+}

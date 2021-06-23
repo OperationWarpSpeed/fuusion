@@ -1,0 +1,14 @@
+#/bin/bash
+# MakeScripts - compile scripts into encoded executables to protect them
+#
+DRIVER=../shellcrypt/driver
+
+FILELIST=`cat filelist`
+
+for file in $FILELIST
+do
+  BASE=`basename $file .sh`
+  $DRIVER $file $BASE /bin/sh
+done
+echo "Scripts built"
+

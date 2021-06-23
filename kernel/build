@@ -1,0 +1,96 @@
+#!/bin/bash
+
+kernel_package=https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.4.tar.xz
+
+TXT_C="tput setaf"    # set text color in BGR format                            
+TXT_R="tput sgr0"     # reset text format                                       
+TXT_B="tput bold"     # set bold                                                
+TXT_U="tput sgr 0 1"  # set underlined 
+
+usage(){
+  app_name=$(basename $0)
+  echo "Usage: $($TXT_B)$app_name [OPTIONS]$($TXT_R)"
+  echo ""
+  echo "  Options:"
+  echo ""
+  echo "    $($TXT_B)-a$($TXT_R)"
+  echo "      Specify platform to be AWS or AZURE."
+  echo "      Required if -v is not specified."
+  echo "      Overwrites -v option."
+  echo ""
+  echo "    $($TXT_B)-v$($TXT_R)"
+  echo "      Specify platform to be VMWARE"
+  echo "      Required if -a is not specified."
+  echo "      Overwrites -a option."
+  echo ""
+  echo "    $($TXT_B)-k KERNEL_PACKAGE_URL$($TXT_R)"
+  echo "      Specify kernel package url. If not specified, default kernel package"
+  echo "      will be downloaded: $kernel_package" 
+  echo ""
+  echo "    $($TXT_B)-y$($TXT_R)"
+  echo "      Skip user prompt and go directly to build."
+  echo ""
+  echo "    $($TXT_B)-h$($TXT_R)"
+  echo "      Display this help and exit."
+}
+
+while getopts ":hyk:av" option; do
+  case $option in
+    h) usage; exit 0;;
+    y) ask_no_questions=true;;
+    k) kernel_package=$OPTARG;;
+    a) platform="aws";;
+    v) platform="vmware";;
+    ?) usage; exit 1;;
+  esac
+done
+
+if [ ! $ask_no_questions ]; then
+
+  if [ "$platform" = "" ]; then
+    read -p "Which platform [1 - aws or azure / 2 - vmware]? " choice
+    case "$choice" in
+      1) platform=aws;;
+      2) platform=vmware;;
+      *) echo "Bad option. Exiting..."; exit 1;;
+    esac
+  fi
+
+  read -p "Change path to kernel package ($kernel_package): " choice
+  if [ "$choice" != "" ]; then kernel_package=$choice; fi
+
+  read -p "Build kernel for $platform with kernel from $kernel_package [Y/n/h]?" choice
+  case "$choice" in
+    y|Y) echo "building...";;
+    n|N) exit 0;;
+    h|H) usage; exit 0;;
+    *) if [ "$choice" != "" ]; then usage; exit 1; fi;;
+  esac
+fi
+
+echo "installing required packages..."
+yum -y install ncurses-devel rpm-build
+rm -rf ~/rpmbuild
+  
+echo "downloading kernel source package..."
+wget $kernel_package
+
+echo "extracting kernel source package..."
+for x in *; do tar -xvf $x; done
+
+cd linux-*
+  echo "preparing config file kernel-config-$platform..."
+  cp ../kernel-config-$platform .config
+  make oldconfig
+  echo "building kernel..."
+  make -j 8 rpm
+cd -
+
+echo "fetching output..."
+mkdir ./out; rm -rf ./out; mkdir ./out
+mv ~/rpmbuild/RPMS/x86_64/*.rpm ./out
+
+echo "clean build..."
+rm -rf ./linux-*
+
+
